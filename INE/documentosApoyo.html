@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos Apoyo - Corregido</title>
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #fcfcfc;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER (Efecto azul restaurado) --- */
+        .main-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo { display: flex; align-items: center; }
+        .header-logo .brand { font-size: 2.2em; font-weight: 900; letter-spacing: -1px; }
+        .header-logo .separator { font-size: 2.5em; font-weight: 300; margin: 0 15px; }
+
+        .header-nav { display: flex; gap: 40px; }
+        .header-nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1em;
+            position: relative;
+            padding: 10px 0;
+            text-align: center;
+            display: inline-block;
+        }
+
+        /* El efecto de la línea azul al pasar el mouse */
+        .header-nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: #34a8f3;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .header-nav a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* --- BREADCRUMBS --- */
+        .breadcrumb-container { padding: 0 60px; margin: 40px 0 20px; }
+        .breadcrumbs-nav { font-size: 15px; color: #666; }
+        .breadcrumbs-nav a { color: #321b44; text-decoration: none; font-weight: 500; }
+        .breadcrumbs-nav a:hover { text-decoration: underline; }
+
+        /* --- CONTENEDOR Y COLUMNAS --- */
+        .container { flex: 1; max-width: 1350px; width: 100%; margin: 0 auto 30px; padding: 0 60px; }
+        .content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; align-items: start; }
+
+        /* --- MENÚ DESPLEGABLE DE DOS NIVELES --- */
+        .menu-item {
+            width: 100%;
+            border-radius: 8px;
+            background: #321b44; /* Morado INE */
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+            overflow: hidden;
+        }
+
+        .main-button {
+            color: white;
+            padding: 20px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 400;
+            font-size: 1.05em;
+        }
+
+        /* NIVEL 1: Aparece con HOVER sobre el botón principal */
+        .dropdown-level-1 {
+            background-color: #452a5a;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .menu-item:hover .dropdown-level-1 {
+            max-height: 1200px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* BOTONES INTERMEDIOS (Fichas, Formatos) */
+        .submenu-trigger {
+            width: 100%;
+            padding: 15px 20px;
+            color: white;
+            background: none;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: left;
+            font-family: 'Roboto';
+            font-size: 0.95em;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .submenu-trigger:hover { background-color: rgba(255,255,255,0.1); }
+
+        .submenu-trigger::after {
+            content: '+';
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .submenu-trigger.active::after { content: '-'; transform: rotate(180deg); }
+
+        /* NIVEL 2: Se activa con CLIC */
+        .dropdown-level-2 {
+            background-color: #b3a0c9; /* Lila claro */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dropdown-level-2.active {
+            max-height: 800px;
+        }
+
+        .dropdown-level-2 a {
+            display: block;
+            padding: 12px 35px;
+            color: black;
+            text-decoration: none;
+            font-size: 0.9em;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.2s;
+        }
+
+        .dropdown-level-2 a:hover {
+            background-color: rgba(255,255,255,0.5);
+            padding-left: 45px;
+            font-weight: 700;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 25px 60px;
+            margin-top: auto;
+        }
+        .footer-content { max-width: 1350px; margin: 0 auto; display: flex; align-items: center; gap: 15px; }
+        .footer-logo { height: 35px; }
+
+        @media (max-width: 900px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .main-header { flex-direction: column; padding: 20px; }
+            .header-nav { gap: 15px; margin-top: 15px; }
+        }
+
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;   /* sin subrayado */
+    color: inherit;          /* mantiene el color original */
+    cursor: pointer;         /* icono de mano al pasar el mouse */
+}
+
+.logo-link:hover {
+    opacity: 0.85;           /* ligero efecto visual */
+}
+
+
+/* --- BOTÓN ANTERIOR ALINEADO CON MIGAJS DE PAN --- */
+.nav-buttons-container {
+    width: 100%;
+    /* Quitamos max-width o lo igualamos al contenedor de breadcrumbs */
+    margin: 10px 0; 
+    padding: 0 60px; /* MISMO PADDING QUE .breadcrumb-container */
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: #321b44;
+    font-size: 1.1em;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.nav-btn i {
+    font-size: 1.8em;
+}
+
+.nav-btn:hover {
+    color: #34a8f3;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+
+<div class="header-logo">
+    <a href="index.html" class="logo-link">
+        <span class="brand">INFOMEX</span>
+        <span class="separator">|</span>
+        <span class="tagline">Sistema de acceso<br>a la información</span>
+    </a>
+</div>
+
+
+        <nav class="header-nav">
+            <a href="PruebaINFOMEX.html">Guías del sistema</a>
+            <a href="tutorial.html">Tutorial para<br>versiones públicas</a>
+            <a href="glosario.html">Glosario</a>
+        </nav>
+    </header>
+
+    <div class="breadcrumb-container">
+        <nav class="breadcrumbs-nav">
+            <a href="index.html">Inicio</a> <span>/</span> <b>Documentos del Apoyo</b>
+        </nav>
+    </div>
+
+<div class="nav-buttons-container">
+    <a href="index.html" class="nav-btn">
+        <i class="far fa-arrow-alt-circle-left"></i> Anterior
+    </a>
+</div>
+
+
+
+    <div class="container">
+        <div class="content-grid">
+            
+            <div class="column">
+                <div class="menu-item">
+                    <div class="main-button">Atención de solicitudes de acceso a la información</div>
+                    <div class="dropdown-level-1">
+                        
+                        <button class="submenu-trigger">Fichas Técnicas</button>
+                        <div class="dropdown-level-2">
+                            <a href="documentosApoyo2.html?tema=info">Información Pública</a>
+                            <a href="#">Incompetencia</a>
+                            <a href="#">Confidencialidad</a>
+                            <a href="#">Confidencialidad - Anexo 1</a>
+                            <a href="#">Confidencialidad - Anexo 2</a>
+                            <a href="#">Reserva</a>
+                            <a href="#">Reserva - Anexo único</a>
+                            <a href="#">Declaración de inexistencia</a>
+                            <a href="#">Sugerencia Turno</a>
+                            <a href="#">Sugerencia Turno - Anexo único</a>
+                        </div>
+
+                        <button class="submenu-trigger">Formatos Tipo</button>
+                        <div class="dropdown-level-2">
+                            <a href="#">Información Pública</a>
+                            <a href="#">Incompetencia</a>
+                            <a href="#">Inexistencia</a>
+                            <a href="#">Confidencialidad</a>
+                            <a href="#">Reserva</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>      
+
+            <div class="column">
+                <div class="menu-item">
+                    <div class="main-button">Atención de solicitudes para el ejercicio de derechos ARCOP</div>
+                    <div class="dropdown-level-1">
+                        <button class="submenu-trigger">Fichas Técnicas</button>
+                        <div class="dropdown-level-2">
+                            <a href="#">Plazos internos</a>
+                            <a href="#">Esquema básico de respuestas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="INE.png" alt="INE Logo" class="footer-logo">
+            <span class="footer-text">© INE México 2026</span>
+        </div>
+    </footer>
+
+    <script>
+        // Manejo de clics para sub-menús
+        document.querySelectorAll('.submenu-trigger').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const targetMenu = button.nextElementSibling;
+                
+                // Toggle de la clase active
+                button.classList.toggle('active');
+                targetMenu.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

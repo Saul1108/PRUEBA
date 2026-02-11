@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos de Apoyo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* 1. Reset Global */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background-color: #efebf4; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
+
+        /* --- HEADER --- */
+        .main-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo { display: flex; align-items: center; }
+        .header-logo .brand { font-size: 2.2em; font-weight: 900; letter-spacing: -1px; }
+        .header-logo .separator { font-size: 2.5em; font-weight: 300; margin: 0 15px; }
+        .header-logo .tagline { font-size: 0.9em; line-height: 1.2; }
+
+        .header-nav { display: flex; gap: 40px; }
+        .header-nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.95em;
+            position: relative;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .header-nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: #34a8f3;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .header-nav a:hover::after { transform: scaleX(1); }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .container {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 60px;
+        }
+
+        /* 3. MIGAJAS DE PAN (CORREGIDAS) */
+        .breadcrumb-container { 
+            padding: 0 60px; 
+            background: #efebf4; 
+            margin-top: 30px;    /* Separación de 20px con header */
+            margin-bottom: 30px; /* Separación de 20px con título */
+        }
+
+        .breadcrumbs { 
+            font-family: 'Roboto', sans-serif; 
+            font-size: 12px;    /* Tamaño exacto */
+            color: #666; 
+        }
+
+        .breadcrumbs a { 
+            color: #321b44; 
+            text-decoration: none; 
+            font-weight: 400; 
+        }
+
+        .breadcrumbs a:hover { 
+            text-decoration: underline; /* Subrayado al pasar el mouse */
+        }
+
+        .breadcrumbs span { margin: 0 8px; color: #999; }
+        .breadcrumbs b { font-weight: 400; color: #666; }
+
+        /* 4. Contenido Principal */
+        .main-content { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: flex; 
+            padding: 0 60px 40px; 
+        }
+        
+        .header-info { 
+            width: 100%; 
+            max-width: 1200px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end; 
+            margin-bottom: 25px; 
+            padding-bottom: 10px;
+            border-bottom: 2px solid #321b44;
+        }
+
+        .doc-title { font-size: 1.8em; font-weight: 700; color: #321b44; }
+
+        /* 5. Descargas */
+        .download-area { display: flex; gap: 20px; }
+        .download-link {
+            text-decoration: none;
+            color: #321b44;
+            font-weight: 700;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+.download-link:hover { color: #34a8f3; }
+
+
+
+
+        /* 6. Imagen */
+       .image-container { 
+    width: 100%; 
+    max-width: 1200px; 
+    background: #fff; 
+    border: 1px solid #ddd; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    padding: 20px;
+    
+    /* ESTO ES LO IMPORTANTE PARA VERTICALIDAD */
+    display: flex;
+    flex-direction: column; /* Alinea los hijos de arriba hacia abajo */
+    align-items: center;    /* Centra las imágenes horizontalmente */
+    gap: 30px;              /* Espacio de 30px entre cada imagen */
+}
+
+.image-container img { 
+    max-width: 100%;        /* Evita que la imagen se salga del cuadro */
+    height: auto;           /* Mantiene la proporción */
+    border: 1px solid #eee; /* Opcional: un borde sutil para cada foto */
+}
+        /* 7. Footer */
+        .site-footer { background-color: #000000; color: white; padding: 20px 60px; }
+        .footer-content { display: flex; align-items: center; gap: 15px; }
+
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;   /* sin subrayado */
+    color: inherit;          /* mantiene el color original */
+    cursor: pointer;         /* icono de mano al pasar el mouse */
+}
+
+.logo-link:hover {
+    opacity: 0.85;           /* ligero efecto visual */
+}
+
+
+
+
+/* --- BOTÓN ANTERIOR ALINEADO CON MIGAJS DE PAN --- */
+.nav-buttons-container {
+    width: 100%;
+    /* Quitamos max-width o lo igualamos al contenedor de breadcrumbs */
+    margin: 20px 0; 
+    padding: 0 60px import!; /* MISMO PADDING QUE .breadcrumb-container */
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: #321b44;
+    font-size: 1.1em;
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.nav-btn i {
+    font-size: 1.8em;
+}
+
+.nav-btn:hover {
+    color: #34a8f3;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+
+    <header class="main-header">
+
+<div class="header-logo">
+    <a href="index.html" class="logo-link">
+        <span class="brand">INFOMEX</span>
+        <span class="separator">|</span>
+        <span class="tagline">Sistema de acceso<br>a la información</span>
+    </a>
+</div>
+
+
+        <nav class="header-nav">
+            <a href="PruebaINFOMEX.html">Guías del sistema</a>
+            <a href="tutorial.html">Tutorial para<br>versiones públicas</a>
+            <a href="glosario.html">Glosario</a>
+        </nav>
+    </header>
+
+<main class="main-content">
+
+    <div class="breadcrumb-container">
+        <nav class="breadcrumbs">
+            <a href="index.html">Inicio</a> <span>/</span> 
+            <a href="documentosApoyo.html">Documentos de Apoyo</a> <span>/</span> 
+            <b id="bread-actual">Cargando...</b>
+        </nav>
+    </div>
+
+
+
+
+<main class="main-content">
+    <div class="header-info">
+        <h2 class="doc-title" id="titulo-doc">Guía visual: Cargando...</h2>
+        
+        <div class="download-area">
+            <a href="Infomex_Admin.pdf" class="download-link" download>
+                Descargar archivo <i class="fas fa-file-download"></i>
+            </a>
+            <a href="Infomex_Admin.pdf" class="download-link" download>
+                Descargar Fichas Técnicas <i class="fas fa-book"></i>
+            </a>
+        </div> 
+    </div>
+
+
+<div class="nav-buttons-container" style="justify-content: space-between;">
+    <a href="documentosApoyo.html" class="nav-btn" id="btn-anterior">
+        <i class="far fa-arrow-alt-circle-left"></i> Anterior
+    </a>
+    <a href="#" class="nav-btn" id="btn-siguiente">
+        Siguiente <i class="far fa-arrow-alt-circle-right"></i>
+    </a>
+</div>
+      
+
+    <div class="image-container" id="contenedor-imagenes">
+        <img id="img-viewer" src="placeholder.jpg" alt="Instrucciones">
+    </div>
+</main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="INE.png" alt="Logo" style="height:25px;">
+            <span>© INE México 2026</span>
+        </div>
+    </footer>
+
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const temaId = params.get('tema');
+
+    const biblioteca = {
+        'info': { n: 'Información Pública', img: ['1.png', '2.png'] },
+        'incompetencia': { n: 'Incompetencia', img: ['admin.jpg'] },
+        'reg_usuario': { n: 'Registra a un usuario', img: ['registro.jpg'] },
+        'reg_partido': { n: 'Registro de Partidos Políticos', img: ['partidos.jpg'] },
+        'busca_usu': { n: 'Busca usuarios registrados', img: ['busqueda.jpg'] }
+    };
+
+    const container = document.getElementById('contenedor-imagenes');
+    const title = document.getElementById('titulo-doc');
+    const bread = document.getElementById('bread-actual');
+    const btnAnterior = document.getElementById('btn-anterior');
+    const btnSiguiente = document.getElementById('btn-siguiente');
+
+    // Obtener las llaves de la biblioteca para saber el orden
+    const temasKeys = Object.keys(biblioteca);
+    const indexActual = temasKeys.indexOf(temaId);
+
+    if (indexActual !== -1) {
+        const data = biblioteca[temaId];
+        bread.innerText = data.n;
+        title.innerText = data.n;
+        
+        container.innerHTML = '';
+
+        // Cargar imágenes
+        data.img.forEach(nombreArchivo => {
+            const nuevaImg = document.createElement('img');
+            nuevaImg.src = "documentosApoyo/" + nombreArchivo;
+            nuevaImg.alt = data.n;
+            container.appendChild(nuevaImg);
+        });
+
+        // --- LÓGICA DE BOTONES ---
+
+        // 1. Botón Anterior
+        if (indexActual === 0) {
+            // Si es el primer tema ('info'), regresa a Bienvenida
+            btnAnterior.href = "index.html";
+        } else {
+            // Si no es el primero, regresa al tema anterior de la lista
+            const temaAnterior = temasKeys[indexActual - 1];
+            btnAnterior.href = `?tema=${temaAnterior}`;
+        }
+
+        // 2. Botón Siguiente
+        if (indexActual < temasKeys.length - 1) {
+            // Si hay un tema después, apunta a él
+            const temaSiguiente = temasKeys[indexActual + 1];
+            btnSiguiente.href = `?tema=${temaSiguiente}`;
+        } else {
+            // Si es el último, podemos ocultar el botón siguiente o mandarlo a otro lado
+            btnSiguiente.style.display = 'none'; 
+        }
+
+    } else {
+        title.innerText = "Error";
+        bread.innerText = "No encontrado";
+        container.innerHTML = "<p>No se encontró el contenido solicitado.</p>";
+        btnSiguiente.style.display = 'none';
+    }
+</script>
+
+
+
+</body>
+</html>

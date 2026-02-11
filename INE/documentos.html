@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador - INFOMEX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* 1. Reset Global */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background-color: #efebf4; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
+
+        /* 2. Header */
+        /* --- HEADER --- */
+        .main-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo { display: flex; align-items: center; }
+        .header-logo .brand { font-size: 2.2em; font-weight: 900; letter-spacing: -1px; }
+        .header-logo .separator { font-size: 2.5em; font-weight: 300; margin: 0 15px; }
+        .header-logo .tagline { font-size: 0.9em; line-height: 1.2; }
+
+        .header-nav { display: flex; gap: 40px; }
+        .header-nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.95em;
+            position: relative;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .header-nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: #34a8f3;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .header-nav a:hover::after { transform: scaleX(1); }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .container {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding:0 40px 60px;
+        }
+
+        /* 3. MIGAJAS DE PAN (CORREGIDAS) */
+        .breadcrumb-container { 
+
+    width: 100%;
+    align-self: stretch;     /* ocupa el mismo ancho que el título */
+    margin-top: 30px;        /* separación con el header */
+    margin-bottom: 12px;     /* más pegado al título */
+}
+
+
+        .breadcrumbs { 
+            font-family: 'Roboto', sans-serif; 
+            font-size: 12px;    /* Tamaño exacto */
+            color: #666; 
+	    text-align: left;
+        }
+
+        .breadcrumbs a { 
+            color: #321b44; 
+            text-decoration: none; 
+            font-weight: 400; 
+        }
+
+        .breadcrumbs a:hover { 
+            text-decoration: underline; /* Subrayado al pasar el mouse */
+        }
+
+        .breadcrumbs span { margin: 0 8px; color: #999; }
+        .breadcrumbs b { font-weight: 400; color: #666; }
+
+        /* 4. Contenido Principal */
+        .main-content { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: flex-start; 
+            padding: 0 60px 40px; 
+        }
+        
+        .header-info { 
+            width: 100%; 
+            max-width: 1200px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 16px; 
+            padding-bottom: 10px;
+            border-bottom: 2px solid #321b44;
+        }
+
+        .doc-title { font-size: 1.8em; font-weight: 700; color: #321b44; }
+
+        /* 5. Descargas */
+        .download-area { display: flex; gap: 20px; }
+        .download-link {
+            text-decoration: none;
+            color: #321b44;
+            font-weight: 700;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .download-link:hover { color: #34a8f3; }
+
+        /* 6. Imagen */
+        .image-container { 
+            width: 100%; 
+            max-width: 900px; 
+            background: #fff; 
+            border: 1px solid #ddd; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+	    /* Ajustamos el alto mínimo para que sea proporcional al nuevo ancho */
+    	     min-height: 450px; 
+    /* Centramos el contenedor mismo */
+    	     margin: 0 auto;
+        }
+
+.image-container img { 
+    /* La imagen se adaptará al contenedor de 900px */
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+}
+
+        /* 7. Footer */
+        .site-footer { background-color: #000000; color: white; padding: 20px 60px; }
+        .footer-content { display: flex; align-items: center; gap: 15px; }
+
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;   /* sin subrayado */
+    color: inherit;          /* mantiene el color original */
+    cursor: pointer;         /* icono de mano al pasar el mouse */
+}
+
+.logo-link:hover {
+    opacity: 0.85;           /* ligero efecto visual */
+}
+
+
+/* 8. Botones de Navegación */
+
+
+/* --- BOTÓN ANTERIOR ALINEADO CON MIGAJS DE PAN --- */
+/* Navegación (Anterior / Siguiente) */
+
+.nav-buttons-container {
+    width: 100%;
+ max-width: 1200px; 
+    display: flex;
+    justify-content: space-between;  /* Anterior a la izq, Siguiente a la der */
+    align-items: center;
+    margin: 16px 0 32px 0;
+    padding: 0;  /* el padding lateral lo pone .main-content */
+}
+
+
+
+
+.nav-btn {
+
+ appearance: none;        /* para Safari/iOS */
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+
+    color: #321b44;
+    font-size: 1.1em;
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;        /* toque de área clickeable sin dibujar caja */
+    cursor: pointer;
+    transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+
+.nav-btn i {
+    font-size: 1.8em;
+}
+
+.nav-btn:hover {
+    color: #34a8f3;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+
+    <header class="main-header">
+
+
+<div class="header-logo">
+    <a href="index.html" class="logo-link">
+        <span class="brand">INFOMEX</span>
+        <span class="separator">|</span>
+        <span class="tagline">Sistema de acceso<br>a la información</span>
+    </a>
+</div>
+
+
+
+
+        <nav class="header-nav">
+            <a href="PruebaINFOMEX.html">Guías del sistema</a>
+            <a href="tutorial.html">Tutorial para<br>versiones públicas</a>
+            <a href="glosario.html">Glosario</a>
+        </nav>
+    </header>
+
+
+
+
+<main class="main-content">
+
+    <div class="breadcrumb-container">
+        <nav class="breadcrumbs">
+            <a href="index.html">Inicio</a> <span>/</span> 
+            <a href="PruebaINFOMEX.html">Guía de usuario</a> <span>/</span> 
+            <b id="bread-actual">Cargando...</b>
+        </nav>
+    </div>
+
+
+    <div class="header-info">
+        <h2 class="doc-title" id="titulo-doc">Guía visual: Cargando...</h2>
+        <div class="download-area">
+            <a id="link-modulo" class="download-link" download>
+                Descargar guía del módulo <i class="fas fa-file-download"></i>
+            </a>
+            <a href="Infomex_Admin.pdf" class="download-link" download>
+                Descargar guía completa <i class="fas fa-book"></i>
+            </a>
+        </div>
+    </div>
+
+
+
+    <div class="nav-buttons-container" style="justify-content: space-between;">
+        <button id="btn-anterior" class="nav-btn">
+            <i class="far fa-arrow-alt-circle-left"></i> Anterior
+        </button>
+        <button id="btn-siguiente" class="nav-btn">
+            Siguiente <i class="far fa-arrow-alt-circle-right"></i>
+        </button>
+    </div>
+
+
+
+    <div class="image-container">
+        <img id="img-viewer" src="placeholder.jpg" alt="Instrucciones">
+    </div>
+
+
+</main>
+
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="INE.png" alt="Logo" style="height:25px;">
+            <span>© INE México 2026</span>
+        </div>
+    </footer>
+
+
+
+
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const temaId = params.get('tema');
+
+    const biblioteca = {
+        'ingreso': { n: 'Ingreso al sistema', img: '1.png' },
+        'admin': { n: 'Administración de cuentas', img: 'admin.jpg' },
+        'reg_usuario': { n: 'Registra a un usuario', img: 'registro.jpg' },
+        'reg_partido': { n: 'Registro de Partidos Políticos', img: 'partidos.jpg' },
+        'busca_usu': { n: 'Busca usuarios registrados', img: 'busqueda.jpg' }
+    };
+
+    const claves = Object.keys(biblioteca);
+    const indexActual = claves.indexOf(temaId);
+
+    const viewer = document.getElementById('img-viewer');
+    const title = document.getElementById('titulo-doc');
+    const linkModulo = document.getElementById('link-modulo');
+    const bread = document.getElementById('bread-actual');
+    const btnAnterior = document.getElementById('btn-anterior');
+    const btnSiguiente = document.getElementById('btn-siguiente');
+
+    if (biblioteca[temaId]) {
+        const data = biblioteca[temaId];
+        const rutaImagen = "img/" + data.img;
+
+        title.innerText = data.n;
+        if (bread) bread.innerText = data.n;
+        viewer.src = rutaImagen;
+
+        // Lógica Botón Anterior
+        btnAnterior.onclick = () => {
+            if (indexActual <= 0) {
+                window.location.href = 'PruebaINFOMEX.html';
+            } else {
+                window.location.href = `?tema=${claves[indexActual - 1]}`;
+            }
+        };
+
+        // Lógica Botón Siguiente
+        btnSiguiente.onclick = () => {
+            if (indexActual < claves.length - 1) {
+                window.location.href = `?tema=${claves[indexActual + 1]}`;
+            } else {
+                alert("Has llegado al final de la guía.");
+            }
+        };
+
+        // Ocultar Siguiente si es el último tema
+        if (indexActual === claves.length - 1) {
+            btnSiguiente.style.visibility = 'hidden';
+        }
+
+        // Fetch para descarga
+        fetch(rutaImagen)
+            .then(response => response.ok ? response.blob() : Promise.reject())
+            .then(blob => {
+                const urlBlob = window.URL.createObjectURL(blob);
+                linkModulo.href = urlBlob;
+                const extension = data.img.split('.').pop();
+                const nombreLimpio = `Guia_${data.n.replace(/\s+/g, '_')}.${extension}`;
+                linkModulo.setAttribute('download', nombreLimpio);
+            })
+            .catch(() => {
+                linkModulo.href = rutaImagen;
+                linkModulo.setAttribute('download', data.img);
+            });
+
+    } else {
+        // Manejo de error si el tema no existe
+        title.innerText = "Error";
+        if (bread) bread.innerText = "No encontrado";
+        viewer.alt = "No se encontró la información.";
+        if (linkModulo) linkModulo.style.display = "none";
+        if (btnAnterior) btnAnterior.style.display = "none";
+        if (btnSiguiente) btnSiguiente.style.display = "none";
+    }
+</script>
+
+
+
+    </body>
+</html>
