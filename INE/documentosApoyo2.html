@@ -69,16 +69,18 @@
 
         /* 3. MIGAJAS DE PAN (CORREGIDAS) */
         .breadcrumb-container { 
-            padding: 0 60px; 
-            background: #efebf4; 
-            margin-top: 30px;    /* Separación de 20px con header */
-            margin-bottom: 30px; /* Separación de 20px con título */
+            width: 100%;
+            align-self: stretch;     /* ocupa el mismo ancho que el título */
+            margin-top: 30px;        /* separación con el header */
+            margin-bottom: 12px;     /* más pegado al título */
+
         }
 
         .breadcrumbs { 
             font-family: 'Roboto', sans-serif; 
             font-size: 12px;    /* Tamaño exacto */
             color: #666; 
+            text-align: left;
         }
 
         .breadcrumbs a { 
@@ -110,8 +112,8 @@
             max-width: 1200px; 
             display: flex; 
             justify-content: space-between; 
-            align-items: flex-end; 
-            margin-bottom: 25px; 
+            align-items: center; 
+            margin-bottom: 16px; 
             padding-bottom: 10px;
             border-bottom: 2px solid #321b44;
         }
@@ -138,7 +140,7 @@
         /* 6. Imagen */
        .image-container { 
     width: 100%; 
-    max-width: 1200px; 
+    max-width: 900px; 
     background: #fff; 
     border: 1px solid #ddd; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
@@ -179,11 +181,12 @@
 /* --- BOTÓN ANTERIOR ALINEADO CON MIGAJS DE PAN --- */
 .nav-buttons-container {
     width: 100%;
-    /* Quitamos max-width o lo igualamos al contenedor de breadcrumbs */
-    margin: 20px 0; 
-    padding: 0 60px import!; /* MISMO PADDING QUE .breadcrumb-container */
+    max-width: 1200px; 
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;  /* Anterior a la izq, Siguiente a la der */
+    align-items: center;
+    margin: 16px 0 32px 0;
+    padding: 0;  /* el padding lateral lo pone .main-content */
 }
 
 .nav-btn {
@@ -353,4 +356,5 @@
 </body>
 
 </html>
+
 
