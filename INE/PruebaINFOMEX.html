@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema INFOMEX - Panel Completo</title>
 
 
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         /* Elige un solo color de fondo. Si quieres igual al primer HTML, usa #efebf4 */
         body {
@@ -31,15 +36,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-	    width: 100%
         }
 
-        .header-logo { display: flex; align-items: center; }
-        .header-logo .brand { font-size: 2.2em; font-weight: 900; letter-spacing: -1px; }
-        .header-logo .separator { font-size: 2.5em; font-weight: 300; margin: 0 15px; }
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
 
+        .header-logo .brand {
+            font-size: 2.2em;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
 
-        .header-nav { display: flex; gap: 40px; }
+        .header-logo .separator {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin: 0 15px;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 40px;
+        }
+
         .header-nav a {
             text-decoration: none;
             color: #333;
@@ -49,6 +69,7 @@
             text-align: center;
             display: inline-block;
         }
+
         .header-nav a::after {
             content: "";
             position: absolute;
@@ -60,48 +81,159 @@
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
-        .header-nav a:hover::after { transform: scaleX(1); }
+
+        .header-nav a:hover::after {
+            transform: scaleX(1);
+        }
 
         /* --- BREADCRUMBS --- */
-        .breadcrumb-container { width: 100%; max-width: 1100px;
- padding: 0 60px; margin: 40px auto 20px; }
-        .breadcrumbs-nav { font-size: 15px; color: #666; 
-      display: flex;
-      justify-content: flex-start;
-      text-align: lef
- }
+        .breadcrumb-container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 60px;
+            margin: 40px auto 20px;
+        }
 
-        .breadcrumbs-nav a { color: #321b44; text-decoration: none; font-weight: 500; }
-        .breadcrumbs-nav a:hover { text-decoration: underline; }
+        .breadcrumbs-nav {
+            font-size: 15px;
+            color: #666;
+            display: flex;
+            justify-content: flex-start;
+            text-align: left;
+        }
 
+        .breadcrumbs-nav a {
+            color: #321b44;
+            text-decoration: none;
+            font-weight: 500;
+        }
 
+        .breadcrumbs-nav a:hover {
+            text-decoration: underline;
+        }
 
-        /* --- CUERPO DE 3 COLUMNAS --- */
+        /* --- BOTÓN ANTERIOR ALINEADO CON MIGAJS DE PAN --- */
+        .nav-buttons-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: #321b44;
+            font-size: 1.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .nav-btn i {
+            font-size: 1.8em;
+        }
+
+        .nav-btn:hover {
+            color: #34a8f3;
+        }
+
+        /* --- OPCIONES DE NAVEGACIÓN (TABS) --- */
+        .options-nav {
+            padding: 0 60px;
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .option-btn {
+            padding: 12px 24px;
+            border: none;
+            background-color: #e0e0e0;
+            color: #333;
+            cursor: pointer;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .option-btn:hover {
+            background-color: #d0d0d0;
+            transform: translateY(-2px);
+        }
+
+        .option-btn.active {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- CONTENEDOR DE PESTAÑAS --- */
+        .tab-content {
+            display: none;
+            /* Oculto por defecto */
+            width: 100%;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+            /* Visible si tiene clase active */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* --- CUERPO DE 3 COLUMNAS (ESTRUCTURA) --- */
         .container {
             max-width: 1100px;
+            /* Reducido para márgenes laterales */
             margin: 30px auto;
             padding: 0 60px;
-            flex: 1; /* empuja el footer hacia abajo */
-	    width: 100%
+            /* Padding aumentado */
+            flex: 1;
+            width: 100%;
         }
+
         .content-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             align-items: start;
         }
-        .column { display: flex; flex-direction: column; gap: 12px; }
 
-        /* --- BOTONES Y PESTAÑAS --- */
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* --- ESTILOS BASE DE MENU-ITEM (SE SOBREESCRIBEN POR TEMA) --- */
         .menu-item {
             width: 100%;
             border-radius: 8px;
             overflow: hidden;
             background: #321b44;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-            transition: transform 0.2s;
+            /* Default */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+            transition: transform 0.2s, background-color 0.3s;
         }
-        .has-dropdown { border-bottom: 6px solid #b3a0c9; }
+
+        .has-dropdown {
+            border-bottom: 6px solid #b3a0c9;
+            /* Default */
+        }
+
         .main-button {
             background: transparent;
             color: white;
@@ -118,41 +250,171 @@
             min-height: 70px;
             text-decoration: none;
         }
-        .menu-item:hover { background-color: #452a5a; }
+
+        .menu-item:hover {
+            background-color: #452a5a;
+            /* Default */
+        }
 
         /* --- SUBMENÚ DESPLEGABLE --- */
         .dropdown-content {
             background-color: #b3a0c9;
+            /* Default */
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease;
         }
+
         .menu-item:hover .dropdown-content {
             max-height: 500px;
-            border-top: 1px solid rgba(255,255,255,0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
         }
+
         .dropdown-content a {
             display: block;
             padding: 12px 20px;
             color: black;
             text-decoration: none;
             font-size: 0.9em;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.2s;
         }
+
         .dropdown-content a:hover {
             font-weight: 700;
-            background-color: rgba(255,255,255,0.15);
+            background-color: rgba(255, 255, 255, 0.15);
             padding-left: 25px;
         }
 
+        /* --- TEMAS DE COLOR --- */
+
+        /* Tema 1: Original (Morado) */
+        .theme-original .menu-item {
+            background: #321b44;
+        }
+
+        .theme-original .has-dropdown {
+            border-bottom-color: #b3a0c9;
+        }
+
+        .theme-original .menu-item:hover {
+            background-color: #452a5a;
+        }
+
+        .theme-original .dropdown-content {
+            background-color: #b3a0c9;
+        }
+
+
+
+        /* Tema 3: UT-GESTION*/
+        .theme-green .menu-item {
+            background: #409aa1;
+        }
+
+        .theme-green .has-dropdown {
+            border-bottom-color: #a0cdd0;
+        }
+
+        .theme-green .menu-item:hover {
+            background-color: #2d6c71;
+        }
+
+        .theme-green .dropdown-content {
+            background-color: #a0cdd0;
+        }
+
+        /* Tema 4: AREA RESPONSABLE */
+        .theme-red .menu-item {
+            background: #d5007f;
+        }
+
+        .theme-red .has-dropdown {
+            border-bottom-color: #ea80bf;
+        }
+
+        .theme-red .menu-item:hover {
+            background-color: #aa0066;
+        }
+
+        .theme-red .dropdown-content {
+            background-color: #ea80bf;
+        }
+
+        /* Tema 5:COMITE TRANSPARENCIA */
+        .theme-orange .menu-item {
+            background: #c791a8;
+        }
+
+        .theme-orange .has-dropdown {
+            border-bottom-color: #e3c8d4;
+        }
+
+        .theme-orange .menu-item:hover {
+            background-color: #9f7486;
+        }
+
+        .theme-orange .dropdown-content {
+            background-color: #e3c8d4;
+        }
+
+
+        /* Tema 7: INE REVISOR*/
+        .theme-dark .menu-item {
+            background: #cbbed4;
+        }
+
+        .theme-dark .has-dropdown {
+            border-bottom-color: #e5dfea;
+        }
+
+        .theme-dark .menu-item:hover {
+            background-color: #a298aa;
+        }
+
+        .theme-dark .dropdown-content {
+            background-color: #e5dfea;
+        }
+
+        /* Tema 8: INE CONSULTA*/
+        .theme-violet .menu-item {
+            background: #f2b0d7;
+        }
+
+        .theme-violet .has-dropdown {
+            border-bottom-color: #f9d8eb;
+        }
+
+        .theme-violet .menu-item:hover {
+            background-color: #c28dac;
+        }
+
+        .theme-violet .dropdown-content {
+            background-color: #f9d8eb;
+        }
+
+
         /* --- RESPONSIVO --- */
         @media (max-width: 1024px) {
-            .content-grid { grid-template-columns: 1fr 1fr; }
+            .content-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
+
         @media (max-width: 768px) {
-            .content-grid { grid-template-columns: 1fr; }
-            .main-header { flex-direction: column; text-align: center; gap: 20px; }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .options-nav {
+                padding: 0 20px;
+            }
         }
 
         /* --- FOOTER --- */
@@ -163,6 +425,7 @@
             margin-top: 50px;
             width: 100%;
         }
+
         .footer-content {
             max-width: 1350px;
             margin: 0 auto;
@@ -170,7 +433,12 @@
             align-items: center;
             gap: 15px;
         }
-        .footer-logo { height: 30px; width: auto; }
+
+        .footer-logo {
+            height: 30px;
+            width: auto;
+        }
+
         .footer-text {
             font-family: 'Roboto', sans-serif;
             font-size: 1.1em;
@@ -178,62 +446,30 @@
             letter-spacing: 0.5px;
         }
 
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
 
-.logo-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;   /* sin subrayado */
-    color: inherit;          /* mantiene el color original */
-    cursor: pointer;         /* icono de mano al pasar el mouse */
-}
-
-.logo-link:hover {
-    opacity: 0.85;           /* ligero efecto visual */
-}
-
-
-/* --- BOTÓN ANTERIOR ALINEADO CON MIGAJS DE PAN --- */
-.nav-buttons-container {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto; 
-    padding: 0 60px; /* MISMO PADDING QUE .breadcrumb-container */
-}
-
-.nav-btn {
-    text-decoration: none;
-    color: #321b44;
-    font-size: 1.1em;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: 0.3s;
-}
-
-.nav-btn i {
-    font-size: 1.8em;
-}
-
-.nav-btn:hover {
-    color: #34a8f3;
-}    </style>
-
-
+        .logo-link:hover {
+            opacity: 0.85;
+        }
+    </style>
 </head>
+
 <body>
 
     <header class="main-header">
-
-
-<div class="header-logo">
-    <a href="index.html" class="logo-link">
-        <span class="brand">INFOMEX</span>
-        <span class="separator">|</span>
-        <span class="tagline">Sistema de acceso<br>a la información</span>
-    </a>
-</div>
-
-
+        <div class="header-logo">
+            <a href="index.html" class="logo-link">
+                <span class="brand">INFOMEX</span>
+                <span class="separator">|</span>
+                <span class="tagline">Sistema de acceso<br>a la información</span>
+            </a>
+        </div>
         <nav class="header-nav">
             <a href="tutorial.html">Tutoriales de<br>versiones públicas</a>
             <a href="documentosApoyo.html">Fichas técnicas y<br>formatos tipo</a>
@@ -241,268 +477,317 @@
         </nav>
     </header>
 
-<div class="breadcrumb-container">
-    <nav class="breadcrumbs-nav">
-        <a href="index.html">Inicio</a> 
-        <span>/</span>
-        <b>Guía de usuario</b>
-    </nav>
-</div>
+    <div class="breadcrumb-container">
+        <nav class="breadcrumbs-nav">
+            <a href="index.html">Inicio</a>
+            <span>/</span>
+            <b>Guía de usuario</b>
+        </nav>
+    </div>
 
-<div class="nav-buttons-container">
-    <a href="index.html" class="nav-btn">
-        <i class="far fa-arrow-alt-circle-left"></i> Anterior
-    </a>
-</div>
+    <div class="nav-buttons-container">
+        <a href="index.html" class="nav-btn">
+            <i class="far fa-arrow-alt-circle-left"></i> Anterior
+        </a>
+    </div>
+
+    <!-- Menú de Opciones -->
+    <div class="options-nav">
+        <button class="option-btn active" onclick="showTab('tab1', this)"
+            style="border-bottom: 3px solid #321b44;">Administrador</button>
+        <button class="option-btn" onclick="showTab('tab3', this)"
+            style="border-bottom: 3px solid #409aa1;">UT-Gestión</button>
+        <button class="option-btn" onclick="showTab('tab4', this)" style="border-bottom: 3px solid #d5007f;">Áreas
+            responsables</button>
+        <button class="option-btn" onclick="showTab('tab5', this)" style="border-bottom: 3px solid #c791a8;">Comité de
+            Transparencia</button>
+        <button class="option-btn" onclick="showTab('tab7', this)"
+            style="border-bottom: 3px solid #cbbed4;">INE-Revisor</button>
+        <button class="option-btn" onclick="showTab('tab8', this)"
+            style="border-bottom: 3px solid #f2b0d7;">INE-Consulta</button>
+    </div>
+
+    <!-- Script para Tabs -->
+    <script>
+        function showTab(tabId, btn) {
+            // Ocultar todos los tabs
+            var contents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].style.display = 'none';
+                contents[i].classList.remove('active');
+            }
+
+            // Mostrar target
+            document.getElementById(tabId).style.display = 'block';
+            document.getElementById(tabId).classList.add('active');
+
+            // Actualizar botones
+            var buttons = document.getElementsByClassName('option-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+                buttons[i].style.backgroundColor = '#e0e0e0';
+                buttons[i].style.color = '#333';
+            }
+            btn.classList.add('active');
+
+            // Colorear botón activo según su borde inferior (truco visual)
+            btn.style.backgroundColor = btn.style.borderBottomColor;
+            btn.style.color = 'white';
+        }
+
+        // Inicializar botón activo al cargar
+        document.addEventListener('DOMContentLoaded', function () {
+            // Activar visualmente el primer botón
+            var firstBtn = document.querySelector('.options-nav .option-btn');
+            if (firstBtn) {
+                firstBtn.style.backgroundColor = firstBtn.style.borderBottomColor;
+                firstBtn.style.color = 'white';
+            }
+
+            // Clonar contenido
+            var originalContent = document.querySelector('#tab1 .content-grid').innerHTML;
+            for (var i = 2; i <= 8; i++) {
+                var container = document.getElementById('content-clone-' + i);
+                if (container) {
+                    container.innerHTML = originalContent;
+                    container.classList.add('content-grid');
+                }
+            }
+        });
+    </script>
 
 
-    <div class="container">
-        <div class="content-grid">
-            
-            <div class="column">
-
-
-
-		<div class="menu-item"><a href="documentos.html?tema=ingreso" class="main-button">Ingreso al sistema</a></div>
-
-
-		<div class="menu-item has-dropdown">
-                    <div class="main-button">Administración de cuentas</div>
-                    <div class="dropdown-content">
-                        <a href="documentos.html?tema=admin">Administración</a>
-                        <a href="documentos.html?tema=reg_usuario">Registra a un usuario</a>
-                        <a href="documentos.html?tema=reg_partido">Registra a un usuario de Partido Político</a>
-                        <a href="documentos.html?tema=busca_usu">Busca usuarios registrados</a>
-                        <a href="documentos.html?tema=por_usu">Por Usuario</a>
-                        <a href="documentos.html?tema=por_rol">Por Rol</a>
-		    </div>
-               </div>		
-
-
-                
-  
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Reportes</div>
-                    <div class="dropdown-content">
-                        <a href="#">Movimientos en Administración</a>
-                        <a href="#">Bitácora de acceso al sistema</a>
-                        <a href="#">Bitácora de acciones por usuario</a>
+    <!-- PESTAÑA 1 (Original) -->
+    <div id="tab1" class="tab-content theme-original active">
+        <div class="container">
+            <h2 style="margin-bottom: 20px; color: #321b44;">Panel Administrador</h2>
+            <div class="content-grid">
+                <!-- Columna 1 -->
+                <div class="column">
+                    <div class="menu-item"><a href="documentos.html?tema=ingreso" class="main-button">Ingreso al
+                            sistema</a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Administración de cuentas</div>
+                        <div class="dropdown-content">
+                            <a href="documentos.html?tema=admin">Administración</a>
+                            <a href="documentos.html?tema=reg_usuario">Registra a un usuario</a>
+                            <a href="documentos.html?tema=reg_partido">Registra a un usuario de Partido Político</a>
+                            <a href="documentos.html?tema=busca_usu">Busca usuarios registrados</a>
+                            <a href="documentos.html?tema=por_usu">Por Usuario</a>
+                            <a href="documentos.html?tema=por_rol">Por Rol</a>
+                        </div>
                     </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Reportes</div>
+                        <div class="dropdown-content">
+                            <a href="#">Movimientos en Administración</a>
+                            <a href="#">Bitácora de acceso al sistema</a>
+                            <a href="#">Bitácora de acciones por usuario</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Cambio de rol</a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Registrar solicitantes y solicitudes</div>
+                        <div class="dropdown-content">
+                            <a href="#">Solicitudes manuales</a>
+                            <a href="#">Tipo de solicitud</a>
+                            <a href="#">Registro de solicitud</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Carga solicitudes de la PNT</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Estatus de solicitudes</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Solicitudes recibidas</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Asignar responsables</a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Retirar turno a áreas</div>
+                        <div class="dropdown-content"><a href="#">Solicitudes ARCOP</a></div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Devolución de turno</a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Responder</div>
+                        <div class="dropdown-content">
+                            <a href="#">Notoria incompetencia</a>
+                            <a href="#">Duplicada</a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Solicitar Requerimiento a áreas</div>
+                        <div class="dropdown-content">
+                            <a href="#">Requerimiento de Aclaración (RA)</a>
+                            <a href="#">Requerimiento Intermedio (RII)</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Requerimiento a recurso de revisión</a></div>
                 </div>
 
-                
-                <div class="menu-item"><a href="#" class="main-button">Cambio de rol</a></div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Registrar solicitantes y solicitudes</div>
-                    <div class="dropdown-content">
-                        <a href="#">Solicitudes manuales</a>
-                        <a href="#">Tipo de solicitud</a>
-                        <a href="#">Registro de solicitud</a>
+                <!-- Columna 2 -->
+                <div class="column">
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Solicitar Prevención a Áreas</div>
+                        <div class="dropdown-content">
+                            <a href="#">Solicitudes ARCOP</a>
+                            <a href="#">Requerimiento de Aclaración</a>
+                            <a href="#">Requerimiento Intermedio</a>
+                        </div>
                     </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Solicitar Requerimiento al solicitante</div>
+                        <div class="dropdown-content"><a href="#">Solicitudes SAI</a></div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Responder Req. a nombre del solicitante</a>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Vía Procedimental al solicitante</div>
+                        <div class="dropdown-content"><a href="#">Solicitudes ARCOP</a></div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Responder Vía Procedimental</a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Solicitar Prevención al solicitante</div>
+                        <div class="dropdown-content"><a href="#">Solicitudes ARCOP</a></div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Responder solicitudes</div>
+                        <div class="dropdown-content"><a href="#">Solicitudes ARCOP</a></div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Datos del Previo Pago</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Previo Pago-Asignar</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Recurso de revisión</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Asignar resp. recurso revisión</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Notificar al INAI</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Sentido de resolución</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Orden de cumplimiento</a></div>
                 </div>
 
-                <div class="menu-item"><a href="#" class="main-button">Carga solicitudes de la Plataforma Nacional de Transparencia</a></div>
-                <div class="menu-item"><a href="#" class="main-button">Estatus de solicitudes</a></div>
-                <div class="menu-item"><a href="#" class="main-button">Solicitudes recibidas</a></div>
-                <div class="menu-item"><a href="#" class="main-button">Asignar responsables</a></div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Retirar el turno a las áreas responsables</div>
-                    <div class="dropdown-content">
-                        <a href="#">Solictudes ARCOP</a>
+                <!-- Columna 3 -->
+                <div class="column">
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Requerimiento desahogado</div>
+                        <div class="dropdown-content"><a href="#">Asignar folio PNT</a></div>
                     </div>
-                </div>
-
-                <div class="menu-item"><a href="#" class="main-button">Devolución de turno</a></div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Responder</div>
-                    <div class="dropdown-content">
-                        <a href="#">Notoria incopetencia</a>
-                        <a href="#">Duplicada</a>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Responder Requerimiento</div>
+                        <div class="dropdown-content">
+                            <a href="#">Desahogado</a>
+                            <a href="#">Notoria incompetencia</a>
+                            <a href="#">Solicitudes ARCOP y SAI</a>
+                        </div>
                     </div>
-                </div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Solicitar Requerimiento a áreas respinsables</div>
-                    <div class="dropdown-content">
-                        <a href="#">Requerimiento de Aclaración (RA)</a>
-                        <a href="#">Requerimiento Intermedio de Información (RII)</a>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Responder Req. Desahogado</div>
+                        <div class="dropdown-content">
+                            <a href="#">Duplicada</a>
+                            <a href="#">Solicitudes ARCOP y SAI</a>
+                        </div>
                     </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Responder Requerimiento</div>
+                        <div class="dropdown-content">
+                            <a href="#">Desahogado</a>
+                            <a href="#">Responder (Concluir) Solicitudes SAI</a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Expediente virtual</div>
+                        <div class="dropdown-content">
+                            <a href="#">Búsqueda de Expedientes</a>
+                            <a href="#">Editar folio de la PNT</a>
+                            <a href="#">Ingresar número de expediente</a>
+                            <a href="#">Regenerar Expedientes</a>
+                            <a href="#">Detalle del expediente virtual</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Actualizar fecha de respuesta</a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Admin. de solcitudes y respuestas</div>
+                        <div class="dropdown-content">
+                            <a href="#">Solicitudes</a>
+                            <a href="#">Respuestas solicitudes</a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Respuestas</div>
+                        <div class="dropdown-content">
+                            <a href="#">Búsqueda General</a>
+                            <a href="#">Búsqueda Otros</a>
+                            <a href="#">Indicadores</a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Directorio de Enlaces</div>
+                        <div class="dropdown-content">
+                            <a href="#">Descarga</a>
+                            <a href="#">Carga</a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Motor de folios asignados</div>
+                        <div class="dropdown-content">
+                            <a href="#">Buscador Solicitudes SAI</a>
+                            <a href="#">Buscador Solicitudes ARCOP</a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Informes</div>
+                        <div class="dropdown-content"><a href="#">Informes fijos</a></div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Centro de Ayuda</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Notificaciones del sistema</a></div>
                 </div>
-
-                <div class="menu-item"><a href="#" class="main-button">Solicitar Requerimiento a un recurso de revisión</a></div>
             </div>
+        </div>
+    </div>
 
+    <!-- PESTAÑA 3 (Verde) -->
+    <div id="tab3" class="tab-content theme-green">
+        <div class="container">
+            <h2 style="margin-bottom: 20px; color: #409aa1">UT-Gestión</h2>
+            <div id="content-clone-3"></div>
+        </div>
+    </div>
 
+    <!-- PESTAÑA 4 (Rojo) -->
+    <div id="tab4" class="tab-content theme-red">
+        <div class="container">
+            <h2 style="margin-bottom: 20px; color: #d5007f;">Áreas responsables</h2>
+            <div id="content-clone-4"></div>
+        </div>
+    </div>
 
-            <div class="column">
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Solicitar Prevención a Áreas Responsables</div>
-                    <div class="dropdown-content">
-                        <a href="#">Solicitudes ARCOP</a>
-                        <a href="#">Requerimiento de Aclaración (RA)</a>
-                        <a href="#">Requerimiento Intermedio de Información (RII)</a>
-                    </div>
-                </div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Solicitar Requerimiento al solicitante</div>
-                    <div class="dropdown-content">
-                        <a href="#">Solicitudes de Acceso a la Información (SAI)</a>
-                    </div>
-                </div>
-
-                <div class="menu-item"><a href="#"class="main-button">Responder Requerimiento a nombre del solicitante</a></div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Solicitar Vía Procedimental al solicitante</div>
-                    <div class="dropdown-content">
-                        <a href="#">Solicitudes ARCOP</a>
-                    </div>
-                </div>
-
-
-                <div class="menu-item"><a href="#" class="main-button">Responder Vía Procedimental a nombre del solicitante</a></div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Solicitar Prevención al solicitante</div>
-                    <div class="dropdown-content">
-                        <a href="#">Solicitudes ARCOP</a>
-                    </div>
-                </div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Responder solicitudes</div>
-                    <div class="dropdown-content">
-                        <a href="#">Solicitudes ARCOP</a>
-                    </div>
-                </div>
-
-                <div class="menu-item"><a href="#" class="main-button">Datos del Previo Pago</a></div>
-                <div class="menu-item"><a href="#" class="main-button">Previo Pago-Asignar responsables</a></div>
-                <div class="menu-item"><a href="#" class="main-button">Recurso de revisión</a></div>
-                <div class="menu-item"><a href="#" class="main-button">Asignar responsable al recurso de revisión</a></div>
-                <div class="menu-item"><a  href="#" class="main-button">Notificar al INAI</a></div>
-                <div class="menu-item"><a href="#"  class="main-button">Sentido de resolución</a></div>
-                <div class="menu-item"><a href="#" class="main-button">Orden de cumplimiento</a></div>
-            </div>
-
-
-
-            <div class="column">
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Requerimiento desahogado</div>
-                    <div class="dropdown-content">
-                        <a href="#">Asignar folio PNT</a>
-                    </div>
-                </div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Responder Requerimiento</div>
-                    <div class="dropdown-content">
-                        <a href="#">Desahogado</a>
-			<a href="#">Notoria incompetencia</a>
-			<a href="#">Solicitudes ARCOP y SAI</a>
-                    </div>
-                </div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Responder Requerimiento Desahogado</div>
-                    <div class="dropdown-content">
-                        <a href="#">Duplicada</a>
-			<a href="#">Solicitudes ARCOP y SAI</a>
-                    </div>
-                </div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Responder Requerimiento</div>
-                    <div class="dropdown-content">
-                        <a href="#">Desahogado</a>
-			<a href="#">Responder (Concluir) Solicitudes SAI</a>
-                    </div>
-                </div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Expediente virtual</div>
-                    <div class="dropdown-content">
-                        <a href="#">Bisqueda de Expedientes</a>
-			<a href="#">Editar folio de la PNT</a>
-			<a href="#">Ingresar número de expediente</a>
-			<a href="#">Regenerar Expedientes</a>
-			<a href="#">Detalle del expediente virtual</a>
-                    </div>
-                </div>
-
-                <div class="menu-item"><a href="#" class="main-button">Actualizar fecha de respuesta de las áreas y la fecha respuesta de la solicitud</a></div>
-
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Administración de solcitudes y respuestas</div>
-                    <div class="dropdown-content">
-                        <a href="#">Solicitudes</a>
-			<a href="#">Respuestas solicitudes</a>
-                    </div>
-                </div>
-
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Respuestas</div>
-                    <div class="dropdown-content">
-                        <a href="#">Búsqueda General</a>
-			<a href="#">Búsqueda Otros</a>
-			<a href="#">Indicadores</a>
-                    </div>
-                </div>
-
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Directorio de Enlaces de Transparencia y Protección de datos Personales</div>
-                    <div class="dropdown-content">
-                        <a href="#">Descarga</a>
-			<a href="#">Carga</a>
-                    </div>
-                </div>
-
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Motor de folios asignados por áreas</div>
-                    <div class="dropdown-content">
-                        <a href="#">Buscador de Solicitudes SAI</a>
-			<a href="#">Buscador de Solicitudes ARCOP</a>
-                    </div>
-                </div>
-
-                <div class="menu-item has-dropdown">
-                    <div class="main-button">Informes</div>
-                    <div class="dropdown-content">
-                        <a href="#">Informes fijos</a>
-                    </div>
-                </div>
-
-                <div class="menu-item"><a href="#" class="main-button">Centro de Ayuda</a></div>
-
-
-                <div class="menu-item"><a href="#" class="main-button">Notificaciones que recibe el usuario de parte del sistema</a></div>
-            </div>
-
+    <!-- PESTAÑA 5 (Naranja) -->
+    <div id="tab5" class="tab-content theme-orange">
+        <div class="container">
+            <h2 style="margin-bottom: 20px; color: #c791a8;">Comité de Transparencia</h2>
+            <div id="content-clone-5"></div>
         </div>
     </div>
 
 
-
-
-<footer class="site-footer">
-    <div class="footer-content">
-        <img src="INE.png" alt="INE Logo" class="footer-logo">
-        <span class="footer-text">© INE México 2026</span>
+    <!-- PESTAÑA 7 (Gris) -->
+    <div id="tab7" class="tab-content theme-dark">
+        <div class="container">
+            <h2 style="margin-bottom: 20px; color: #cbbed4;">INE-Revisor</h2>
+            <div id="content-clone-7"></div>
+        </div>
     </div>
-</footer>
+
+    <!-- PESTAÑA 8 (Violeta) -->
+    <div id="tab8" class="tab-content theme-violet">
+        <div class="container">
+            <h2 style="margin-bottom: 20px; color: #f2b0d7;">INE-Consulta</h2>
+            <div id="content-clone-8"></div>
+        </div>
+    </div>
+
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="INE.png" alt="INE Logo" class="footer-logo">
+            <span class="footer-text">© INE México 2026</span>
+        </div>
+    </footer>
 
 
 </body>
+
 </html>
+
