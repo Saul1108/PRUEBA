@@ -378,19 +378,19 @@
 
         /* Tema 8: INE CONSULTA*/
         .theme-violet .menu-item {
-            background: #f2b0d7;
+            background: #0063b8;
         }
 
         .theme-violet .has-dropdown {
-            border-bottom-color: #f9d8eb;
+            border-bottom-color: #80b1dc;
         }
 
         .theme-violet .menu-item:hover {
-            background-color: #c28dac;
+            background-color: #004f93;
         }
 
         .theme-violet .dropdown-content {
-            background-color: #f9d8eb;
+            background-color: #80b1dc;
         }
 
 
@@ -504,7 +504,7 @@
         <button class="option-btn" onclick="showTab('tab7', this)"
             style="border-bottom: 3px solid #cbbed4;">INE-Revisor</button>
         <button class="option-btn" onclick="showTab('tab8', this)"
-            style="border-bottom: 3px solid #f2b0d7;">INE-Consulta</button>
+            style="border-bottom: 3px solid #0063b8;">INE-Consulta</button>
     </div>
 
     <!-- Script para Tabs -->
@@ -557,7 +557,7 @@
     </script>
 
 
-    <!-- PESTAÑA 1 (Original) -->
+    <!-- PESTAÑA 1 ADMINISTRADOR -->
     <div id="tab1" class="tab-content theme-original active">
         <div class="container">
             <h2 style="margin-bottom: 20px; color: #321b44;">Panel Administrador</h2>
@@ -737,44 +737,333 @@
         </div>
     </div>
 
-    <!-- PESTAÑA 3 (Verde) -->
+    <!-- PESTAÑA 2 UT-GESTION -->
     <div id="tab3" class="tab-content theme-green">
         <div class="container">
             <h2 style="margin-bottom: 20px; color: #409aa1">UT-Gestión</h2>
-            <div id="content-clone-3"></div>
+            <div class="content-grid">
+                <!-- Columna 1 -->
+                <div class="column">
+                    <div class="menu-item"><a href="#" class="main-button">Ingreso al
+                            sistema</a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Registrar solicitantes y solicitudes</div>
+                        <div class="dropdown-content">
+                            <a href="#">Solicitudes manuales</a>
+                            <a href="#">Tipo de solicitud</a>
+                            <a href="#">Registro de solicitud</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Carga solicitudes de la Plataforma Nacional de Transparencia </a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Estatus de solicitudes</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Solicitudes recibidas</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Asignar responsable</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Retirar el turno a las áreas responsables</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Devolución de turno</a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Responder</div>
+                        <div class="dropdown-content">
+                            <a href="#">Notoria incompetencia</a>
+                            <a href="#">Duplicada</a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Solicitar Requerimiento a áreas responsables</div>
+                        <div class="dropdown-content">
+                            <a href="#">Requerimiento de Aclaración (RA)</a>
+                            <a href="#">Requerimiento Intermedio de Información (RII)</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Solicitar requerimiento a un recurso de revisión</a></div>
+                </div>
+
+                <!-- Columna 2 -->
+                <div class="column">
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Solicitar Prevención a Áreas Responsables</div>
+                        <div class="dropdown-content">
+                            <a href="#">Requerimiento de Aclaración (RA)</a>
+                            <a href="#">Requerimiento Intermedio de Información (RII)</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Solicitar Requerimiento al solicitante</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Responder Requerimiento a nombre del solicitante</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Solicitar Vía Procedimental al solicitante</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Responder Vía procedimental a nombre del solicitante</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Solicitar Prevención al solicitante</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Responder solicitudes</a></div>
+                     <div class="menu-item has-dropdown">
+                        <div class="main-button">Datos del Previo Pago</div>
+                        <div class="dropdown-content">
+                            <a href="#">Previo Pago-Asignar responsables</a>
+                            <a href="#">Asignación Previo Pago</a>
+                        </div>
+                    </div>
+                     <div class="menu-item has-dropdown">
+                        <div class="main-button">Recurso de revisión</div>
+                        <div class="dropdown-content">
+                            <a href="#">Asignar responsable al recurso de revisión</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Notificar al INAI</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Sentido de resolución</a></div>
+
+                </div>
+
+                <!-- Columna 3 -->
+                <div class="column">
+                                        <div class="menu-item"><a href="#" class="main-button">Orden de cumplimiento</a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Requerimiento desahogado</div>
+                        <div class="dropdown-content"><a href="#">Asignar folio PNT</a></div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Responder Requerimiento desahogado</div>
+                        <div class="dropdown-content"><a href="#">Notoria incompetencia</a></div>
+                        <div class="dropdown-content"><a href="#">Duplicada</a></div>
+                        <div class="dropdown-content"><a href="#">Responder (Concluir)</a></div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Expediente virtual</div>
+                        <div class="dropdown-content"><a href="#">Búsqueda de Expedientes</a></div>
+                        <div class="dropdown-content"><a href="#">Editar folio de la PNT</a></div>
+                        <div class="dropdown-content"><a href="#">Ingresar número de expediente</a></div>
+                        <div class="dropdown-content"><a href="#">Regenerar Expedientes</a></div>
+                        <div class="dropdown-content"><a href="#">Detalle del expediente virtual</a></div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Reportes</div>
+                        <div class="dropdown-content"><a href="#">Búsqueda General</a></div>
+                        <div class="dropdown-content"><a href="#">Búsqueda Otros</a></div>
+                        <div class="dropdown-content"><a href="#">Indicadores</a></div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Directorio de Enlaces de Transparencia y Protección de datos Personales</div>
+                        <div class="dropdown-content"><a href="#">Descarga</a></div>
+                        <div class="dropdown-content"><a href="#">Carga</a></div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Motor de folios asignados por áreas</div>
+                        <div class="dropdown-content"><a href="#">Buscador de Solicitudes SAI</a></div>
+                        <div class="dropdown-content"><a href="#">Buscador de Solicitudes ARCOP</a></div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Informes</div>
+                        <div class="dropdown-content"><a href="#">Informes fijos</a></div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Centro de Ayuda</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Notificaciones que recibe el usuario de parte del sistema</a></div>
+
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- PESTAÑA 4 (Rojo) -->
+    <!-- PESTAÑA AREAS RESPONSABLES -->
     <div id="tab4" class="tab-content theme-red">
         <div class="container">
-            <h2 style="margin-bottom: 20px; color: #d5007f;">Áreas responsables</h2>
-            <div id="content-clone-4"></div>
+         <h2 style="margin-bottom: 20px; color: #d5007f;">Áreas responsables</h2>
+            <div class="content-grid">
+                <!-- Columna 1 -->
+                <div class="column">
+                    <div class="menu-item"><a href="#" class="main-button">Ingreso al sistema</a></div>
+
+
+
+
+                </div>
+                    
+                <!-- Columna 2 -->
+                <div class="column">
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Solicitar Prevención a Áreas Responsables</div>
+                        <div class="dropdown-content">
+                            <a href="#">Requerimiento de Aclaración (RA)</a>
+                            <a href="#">Requerimiento Intermedio de Información (RII)</a>
+                        </div>
+                    </div>
+                    
+
+
+
+                </div>
+
+                <!-- Columna 3 -->
+                <div class="column">
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Requerimiento desahogado</div>
+                        <div class="dropdown-content"><a href="#">Asignar folio PNT</a></div>
+                    </div>
+                    
+
+
+
+
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- PESTAÑA 5 (Naranja) -->
+    <!-- PESTAÑA COMITÉ DE TRANSPARENCIA -->
     <div id="tab5" class="tab-content theme-orange">
         <div class="container">
             <h2 style="margin-bottom: 20px; color: #c791a8;">Comité de Transparencia</h2>
-            <div id="content-clone-5"></div>
+            <div class="content-grid">
+                <!-- Columna 1 -->
+                <div class="column">
+                    <div class="menu-item"><a href="#" class="main-button">Ingreso al sistema</a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Registro de sesiones y resoluciones del comité</div>
+                        <div class="dropdown-content">
+                            <a href="#">Responder solicitudes que requieren pronunciamiento del Comité de Transparencia</a>
+                            <a href="#">Responder solicitud de ampliación de plazo </a>
+                            <a href="#">Respuestas </a>
+                            <a href="#">Consultar Sesiones de Comité</a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Buscador de Datos Personales e Información Reservada</div>
+                        <div class="dropdown-content">
+                            <a href="#">Consulta de información</a>
+                            <a href="#">Datos personales</a>
+                            <a href="#">Buscar Información de Datos Personales</a>
+                            <a href="#">Buscar Catálogo de Datos Personales (CADA)</a>
+                            <a href="#">Información Reservada</a>
+                            <a href="#">Vigente </a>
+                            <a href="#">Histórica</a>
+                            <a href="#">Documentos testados </a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Buscador de Datos Personales e Información Reservada</div>
+                        <div class="dropdown-content">
+                            <a href="#">Administración de Información </a>
+                        </div>
+                    </div>
+                </div>
+                    
+                <!-- Columna 2 -->
+                <div class="column">
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Expediente virtual</div>
+                        <div class="dropdown-content">
+                            <a href="#">Búsqueda de Expedientes</a>
+                            <a href="#">Editar folio de la PNT</a>
+                            <a href="#">Ingresar número de expediente</a>
+                            <a href="#">Asignar o editar usuario</a>
+                            <a href="#">Regenerar Expedientes</a>
+                            <a href="#">Detalle del expediente virtual</a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Repositorio del CT</div>
+                        <div class="dropdown-content">
+                            <a href="#">Buscar </a>
+                            <a href="#">Datos del expediente virtual</a>
+                            <a href="#">Módulo Descargar </a>
+                        </div>
+                    </div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Motor de folios asignados por áreas</div>
+                        <div class="dropdown-content">
+                            <a href="#">Buscador de Solicitudes SAI</a>
+                            <a href="#">Buscador de Solicitudes ARCOP</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Estatus de solicitudes </a></div>
+                </div>
+
+                <!-- Columna 3 -->
+                <div class="column">
+                    <div class="menu-item"><a href="#" class="main-button">Dar de baja una solicitud </a></div>
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Solicitar Requerimiento/Prevención</div>
+                        <div class="dropdown-content">
+                            <a href="#">Solicitudes de Acceso a la Información</a>
+                            <a href="#">Solicitudes ARCOP</a>
+                            <a href="#">Requerimiento de Aclaración (RA)</a>
+                            <a href="#">Requerimiento Intermedio de Información (RII)</a>
+                            <a href="#">Devolución de turno</a>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item"><a href="#" class="main-button">Centro de Ayuda</a></div> 
+                    <div class="menu-item"><a href="#" class="main-button">otificaciones que recibe el usuario de parte del sistema</a></div> 
+                </div>
+            </div>
+
+
+
+
+
         </div>
     </div>
 
 
-    <!-- PESTAÑA 7 (Gris) -->
+    <!-- PESTAÑA INE REVISOR -->
     <div id="tab7" class="tab-content theme-dark">
         <div class="container">
             <h2 style="margin-bottom: 20px; color: #cbbed4;">INE-Revisor</h2>
-            <div id="content-clone-7"></div>
+            <div class="content-grid">
+                <!-- Columna 1 -->
+                <div class="column">
+                    <div class="menu-item"><a href="#" class="main-button">Ingreso al sistema</a></div>
+                    <div class="menu-item"><a href="#" class="main-button">Atender una solicitud</a></div>
+                </div>
+                    
+                <!-- Columna 2 -->
+                <div class="column">
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Sentido de resolución</div>
+                        <div class="dropdown-content">
+                            <a href="#">Confirma y Sobresee</a>
+                            <a href="#">Modifica, Revoca y Ordena</a>
+                        </div>
+                    </div>
+                    <div class="menu-item"><a href="#" class="main-button">Orden de cumplimiento</a></div>
+                </div>
+
+                <!-- Columna 3 -->
+                <div class="column">
+                    <div class="menu-item"><a href="#" class="main-button">Notificar orden de cumplimiento</a></div>                  
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- PESTAÑA 8 (Violeta) -->
+    <!-- PESTAÑA INE CONSULTA-->
     <div id="tab8" class="tab-content theme-violet">
         <div class="container">
-            <h2 style="margin-bottom: 20px; color: #f2b0d7;">INE-Consulta</h2>
-            <div id="content-clone-8"></div>
+            <h2 style="margin-bottom: 20px; color: #0063b8;">INE-Consulta</h2>
+            <div class="content-grid">
+                <!-- Columna 1 -->
+                <div class="column">
+                    <div class="menu-item"><a href="#" class="main-button">Ingreso al sistema</a></div>
+                </div>
+                    
+                <!-- Columna 2 -->
+                <div class="column">
+                    <div class="menu-item has-dropdown">
+                        <div class="main-button">Motor de folios asignados por áreas</div>
+                        <div class="dropdown-content">
+                            <a href="#">Buscador de Solicitudes SAI</a>
+                            <a href="#">Buscador de Solicitudes ARCOP</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 3 -->
+                <div class="column">
+                    <div class="menu-item"><a href="#" class="main-button">Solicitudes</a></div>                  
+                </div>
+            </div>
+
+
+
+
+
+
         </div>
     </div>
 
@@ -790,4 +1079,6 @@
 </body>
 
 </html>
+
+
 
