@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,18 @@
 
     <style>
         /* 1. Reset Global */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body { 
-            font-family: 'Roboto', sans-serif; 
-            background-color: #efebf4; 
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #efebf4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* 2. Header */
@@ -30,12 +35,33 @@
             align-items: center;
         }
 
-        .header-logo { display: flex; align-items: center; }
-        .header-logo .brand { font-size: 2.2em; font-weight: 900; letter-spacing: -1px; }
-        .header-logo .separator { font-size: 2.5em; font-weight: 300; margin: 0 15px; }
-        .header-logo .tagline { font-size: 0.9em; line-height: 1.2; }
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
 
-        .header-nav { display: flex; gap: 40px; }
+        .header-logo .brand {
+            font-size: 2.2em;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .header-logo .separator {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin: 0 15px;
+        }
+
+        .header-logo .tagline {
+            font-size: 0.9em;
+            line-height: 1.2;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 40px;
+        }
+
         .header-nav a {
             text-decoration: none;
             color: #333;
@@ -57,7 +83,9 @@
             transition: transform 0.3s ease;
         }
 
-        .header-nav a:hover::after { transform: scaleX(1); }
+        .header-nav a:hover::after {
+            transform: scaleX(1);
+        }
 
         /* --- CONTENIDO PRINCIPAL --- */
         .container {
@@ -65,65 +93,85 @@
             max-width: 1100px;
             width: 100%;
             margin: 0 auto;
-            padding:0 40px 60px;
+            padding: 0 40px 60px;
         }
 
         /* 3. MIGAJAS DE PAN (CORREGIDAS) */
-        .breadcrumb-container { 
+        .breadcrumb-container {
 
-    width: 100%;
-    align-self: stretch;     /* ocupa el mismo ancho que el título */
-    margin-top: 30px;        /* separación con el header */
-    margin-bottom: 12px;     /* más pegado al título */
-}
-
-
-        .breadcrumbs { 
-            font-family: 'Roboto', sans-serif; 
-            font-size: 12px;    /* Tamaño exacto */
-            color: #666; 
-	    text-align: left;
+            width: 100%;
+            align-self: stretch;
+            /* ocupa el mismo ancho que el título */
+            margin-top: 30px;
+            /* separación con el header */
+            margin-bottom: 12px;
+            /* más pegado al título */
         }
 
-        .breadcrumbs a { 
-            color: #321b44; 
-            text-decoration: none; 
-            font-weight: 400; 
+
+        .breadcrumbs {
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            /* Tamaño exacto */
+            color: #666;
+            text-align: left;
         }
 
-        .breadcrumbs a:hover { 
-            text-decoration: underline; /* Subrayado al pasar el mouse */
+        .breadcrumbs a {
+            color: #321b44;
+            text-decoration: none;
+            font-weight: 400;
         }
 
-        .breadcrumbs span { margin: 0 8px; color: #999; }
-        .breadcrumbs b { font-weight: 400; color: #666; }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+            /* Subrayado al pasar el mouse */
+        }
+
+        .breadcrumbs span {
+            margin: 0 8px;
+            color: #999;
+        }
+
+        .breadcrumbs b {
+            font-weight: 400;
+            color: #666;
+        }
 
         /* 4. Contenido Principal */
-        .main-content { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: flex-start; 
-            padding: 0 40px 40px; 
-	    max-width: 1100px;
-	    margin: 0 auto;
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0 40px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
         }
-        
-        .header-info { 
-            width: 100%; 
-            max-width: 1200px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            margin-bottom: 16px; 
+
+        .header-info {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
             padding-bottom: 10px;
             border-bottom: 2px solid #321b44;
         }
 
-        .doc-title { font-size: 1.8em; font-weight: 700; color: #321b44; }
+        .doc-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #321b44;
+        }
 
         /* 5. Descargas */
-        .download-area { display: flex; gap: 20px; }
+        .download-area {
+            display: flex;
+            gap: 20px;
+        }
+
         .download-link {
             text-decoration: none;
             color: #321b44;
@@ -134,113 +182,131 @@
             gap: 8px;
             transition: 0.3s;
         }
-        .download-link:hover { color: #34a8f3; }
 
-        /* 6. Imagen */
-        .image-container { 
-            width: 100%; 
-            max-width: 900px; 
-            background: #fff; 
-            border: 1px solid #ddd; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-	    /* Ajustamos el alto mínimo para que sea proporcional al nuevo ancho */
-    	     min-height: 450px; 
-    /* Centramos el contenedor mismo */
-    	     margin: 0 auto;
+        .download-link:hover {
+            color: #34a8f3;
         }
 
-.image-container img { 
-    /* La imagen se adaptará al contenedor de 900px */
-    max-width: 100%; 
-    height: auto; 
-    display: block; 
-}
+        /* 6. Imagen */
+        .image-container {
+            width: 100%;
+            max-width: 900px;
+            background: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+            min-height: 450px;
+            margin: 0 auto;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid #eee;
+        }
 
         /* 7. Footer */
-        .site-footer { background-color: #000000; color: white; padding: 20px 60px; }
-        .footer-content { display: flex; align-items: center; gap: 15px; }
+        .site-footer {
+            background-color: #000000;
+            color: white;
+            padding: 20px 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
 
-.logo-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;   /* sin subrayado */
-    color: inherit;          /* mantiene el color original */
-    cursor: pointer;         /* icono de mano al pasar el mouse */
-}
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            /* sin subrayado */
+            color: inherit;
+            /* mantiene el color original */
+            cursor: pointer;
+            /* icono de mano al pasar el mouse */
+        }
 
-.logo-link:hover {
-    opacity: 0.85;           /* ligero efecto visual */
-}
-
-
-/* 8. Botones de Navegación */
-
-
-/* --- BOTÓN ANTERIOR ALINEADO CON MIGAJS DE PAN --- */
-/* Navegación (Anterior / Siguiente) */
-
-.nav-buttons-container {
-    width: 100%;
- max-width: 1200px; 
-    display: flex;
-    justify-content: space-between;  /* Anterior a la izq, Siguiente a la der */
-    align-items: center;
-    margin: 16px 0 32px 0;
-    padding: 0;  /* el padding lateral lo pone .main-content */
-}
+        .logo-link:hover {
+            opacity: 0.85;
+            /* ligero efecto visual */
+        }
 
 
+        /* 8. Botones de Navegación */
 
 
-.nav-btn {
+        /* --- BOTÓN ANTERIOR ALINEADO CON MIGAJS DE PAN --- */
+        /* Navegación (Anterior / Siguiente) */
 
- appearance: none;        /* para Safari/iOS */
-    background: none;
-    border: none;
-    outline: none;
-    box-shadow: none;
-
-    color: #321b44;
-    font-size: 1.1em;
-    font-weight: 400;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 8px;        /* toque de área clickeable sin dibujar caja */
-    cursor: pointer;
-    transition: color 0.25s ease, opacity 0.25s ease;
-}
-
-
-.nav-btn i {
-    font-size: 1.8em;
-}
-
-.nav-btn:hover {
-    color: #34a8f3;
-}
+        .nav-buttons-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            /* Anterior a la izq, Siguiente a la der */
+            align-items: center;
+            margin: 16px 0 32px 0;
+            padding: 0;
+            /* el padding lateral lo pone .main-content */
+        }
 
 
 
+
+        .nav-btn {
+
+            appearance: none;
+            /* para Safari/iOS */
+            background: none;
+            border: none;
+            outline: none;
+            box-shadow: none;
+
+            color: #321b44;
+            font-size: 1.1em;
+            font-weight: 400;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 8px;
+            /* toque de área clickeable sin dibujar caja */
+            cursor: pointer;
+            transition: color 0.25s ease, opacity 0.25s ease;
+        }
+
+
+        .nav-btn i {
+            font-size: 1.8em;
+        }
+
+        .nav-btn:hover {
+            color: #34a8f3;
+        }
     </style>
 </head>
+
 <body>
 
 
     <header class="main-header">
 
 
-<div class="header-logo">
-    <a href="index.html" class="logo-link">
-        <span class="brand">INFOMEX</span>
-        <span class="separator">|</span>
-        <span class="tagline">Sistema de acceso<br>a la información</span>
-    </a>
-</div>
+        <div class="header-logo">
+            <a href="index.html" class="logo-link">
+                <span class="brand">INFOMEX</span>
+                <span class="separator">|</span>
+                <span class="tagline">Sistema de acceso<br>a la información</span>
+            </a>
+        </div>
 
 
 
@@ -255,48 +321,48 @@
 
 
 
-<main class="main-content">
+    <main class="main-content">
 
-    <div class="breadcrumb-container">
-        <nav class="breadcrumbs">
-            <a href="index.html">Inicio</a> <span>/</span> 
-            <a href="PruebaINFOMEX.html">Guía de usuario</a> <span>/</span> 
-            <b id="bread-actual">Cargando...</b>
-        </nav>
-    </div>
-
-
-    <div class="header-info">
-        <h2 class="doc-title" id="titulo-doc">Guía visual: Cargando...</h2>
-        <div class="download-area">
-            <a id="link-modulo" class="download-link" download>
-                Descargar guía del módulo <i class="fas fa-file-download"></i>
-            </a>
-            <a href="Infomex_Admin.pdf" class="download-link" download>
-                Descargar guía completa <i class="fas fa-book"></i>
-            </a>
+        <div class="breadcrumb-container">
+            <nav class="breadcrumbs">
+                <a href="index.html">Inicio</a> <span>/</span>
+                <a href="PruebaINFOMEX.html">Guía de usuario</a> <span>/</span>
+                <b id="bread-actual">Cargando...</b>
+            </nav>
         </div>
-    </div>
+
+
+        <div class="header-info">
+            <h2 class="doc-title" id="titulo-doc">Guía visual: Cargando...</h2>
+            <div class="download-area">
+                <a id="link-modulo" class="download-link" download>
+                    Descargar guía del módulo <i class="fas fa-file-download"></i>
+                </a>
+                <a href="Infomex_Admin.pdf" class="download-link" download>
+                    Descargar guía completa <i class="fas fa-book"></i>
+                </a>
+            </div>
+        </div>
 
 
 
-    <div class="nav-buttons-container" style="justify-content: space-between;">
-        <button id="btn-anterior" class="nav-btn">
-            <i class="far fa-arrow-alt-circle-left"></i> Anterior
-        </button>
-        <button id="btn-siguiente" class="nav-btn">
-            Siguiente <i class="far fa-arrow-alt-circle-right"></i>
-        </button>
-    </div>
+        <div class="nav-buttons-container" style="justify-content: space-between;">
+            <button id="btn-anterior" class="nav-btn">
+                <i class="far fa-arrow-alt-circle-left"></i> Anterior
+            </button>
+            <button id="btn-siguiente" class="nav-btn">
+                Siguiente <i class="far fa-arrow-alt-circle-right"></i>
+            </button>
+        </div>
 
 
 
-    <div class="image-container">
-        <img id="img-viewer" src="placeholder.jpg" alt="Instrucciones">
-    </div>
+        <div class="image-container" id="image-viewer-container">
+            <!-- Las imágenes se cargarán dinámicamente aquí -->
+        </div>
 
 
-</main>
+    </main>
 
 
     <footer class="site-footer">
@@ -310,86 +376,190 @@
 
 
 
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const temaId = params.get('tema');
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const temaId = params.get('tema');
 
-    const biblioteca = {
-        'ingreso': { n: 'Ingreso al sistema', img: '1.png' },
-        'admin': { n: 'Administración de cuentas', img: 'admin.jpg' },
-        'reg_usuario': { n: 'Registra a un usuario', img: 'registro.jpg' },
-        'reg_partido': { n: 'Registro de Partidos Políticos', img: 'partidos.jpg' },
-        'busca_usu': { n: 'Busca usuarios registrados', img: 'busqueda.jpg' }
-    };
+        const biblioteca = {
+            // --- ADMINISTRACIÓN ---
+            'ingreso_al_sistema': { n: 'Ingreso al sistema', img: '4.png' },
+            'administración_de_cuentas': { n: 'Administración', img: ['5.png', '6.png'] },
+            'registra_a_un_usuario': { n: 'Registra a un usuario', img: ['5.png', '6.png'] },
+            'registra_a_un_usuario_de_partidos': { n: 'Registra a un usuario de Partidos Políticos', img: '7.png' },
+            'busca_usuarios_registrados': { n: 'Busca usuarios registrados', img: '8.png' },
+            'por_usu': { n: 'Búsqueda por Usuario', img: ['8.png', '9.png'] },
+            'por_rol': { n: 'Búsqueda por Rol', img: '10.png' },
 
-    const claves = Object.keys(biblioteca);
-    const indexActual = claves.indexOf(temaId);
+            'mov': { n: 'Movimientos en Administración de cuentas', img: '11.png' },
+            'bitácora_de_acceso_al_sistema': { n: 'Bitácora de acceso al sistema', img: '12.png' },
+            'bitácora_de_acciones_por_usuario': { n: 'Bitácora de acciones por usuario', img: '13.png' },
+            'roles': { n: 'Cambio de rol', img: '14.png' },
 
-    const viewer = document.getElementById('img-viewer');
-    const title = document.getElementById('titulo-doc');
-    const linkModulo = document.getElementById('link-modulo');
-    const bread = document.getElementById('bread-actual');
-    const btnAnterior = document.getElementById('btn-anterior');
-    const btnSiguiente = document.getElementById('btn-siguiente');
+            'solicitudes': { n: 'Solicitudes manuales', img: ['15.png', '16.png'] },
+            'tipo_de_solicitud': { n: 'Tipo de solicitud', img: '17.png' },
+            'registro_de_solicitud': { n: 'Registro de solicitud', img: ['18.png', '19.png', '20.png'] },
 
-    if (biblioteca[temaId]) {
-        const data = biblioteca[temaId];
-        const rutaImagen = "img/" + data.img;
+            'carga': { n: 'Carga solicitudes de la PNT', img: ['21.png', '22.png', '23.png', '24.png', '25.png'] },
+            'estatus_de_solicitudes': { n: 'Estatus de solicitudes', img: '26.png' },
+            'solicitudes_recibidas': { n: 'Solicitudes recibidas', img: ['27.png', '28.png'] },
+            'asignar_responsable': { n: 'Asignar responsables', img: ['29.png', '30.png', '31.png'] },
+            'retirar_el_turno_a_las_áreas': { n: 'Retirar turno a áreas - Solicitudes ARCOP', img: ['32.png', '33.png', '34.png'] },
+            'devolución_de_turno': { n: 'Devolución de turno', img: ['35.png', '36.png'] },
+            'responder': { n: 'Notoria incompetencia', img: ['37.png', '38.png', '39.png'] },
+            'duplicada': { n: 'Duplicada', img: ['40.png', '41.png'] },
+            'responsables': { n: 'Solicitar Requerimiento a áreas Responsables', img: ['42.png', '43.png'] },
+            'solicitar_requerimiento_al': { n: 'Requerimiento de Aclaración (RA)', img: '44.png' },
+            'requerimiento_intermedio_de': { n: 'Requerimiento Intermedio (RII)', img: '45.png' },
+            'solicitud_recurso_revision': { n: 'Solicitar Requerimiento a un recurso de revisión', img: ['46.png', '47.png', '48.png'] },
+            'arcop': { n: 'Solicitudes ARCOP', img: ['49.png', '50.png'] },
+            'solicitar_requerimiento_al': { n: 'Requerimiento de Aclaración (RA)', img: '51.png' },
+            'requerimiento_intermedio_de': { n: 'Requerimiento Intermedio de Información(RII)', img: '52.png' },
+            'solicitante': { n: 'Solicitudes de Acceso a la Información SAI', img: ['53.png', '54.png', '55.png'] },
+            'responder_requerimiento': { n: 'Responder Requerimiento a nombre del solicitante', img: ['56.png', '57.png', '58.png'] },
+            'solicitudes_arcop': { n: 'Vía Procedimental al solicitante - Solicitudes ARCOP', img: ['59.png', '60.png', '61.png'] },
+            'responder': { n: 'Responder Vía Procedimental a nombre del solicitante', img: ['62.png', '63.png'] },
+            'solicitudes_arcop': { n: 'Solicitar Prevención al solicitante', img: ['64.png', '65.png', '66.png'] },
+            'sai_y_arcop': { n: 'SAI y ARCOP', img: ['67.png', '68.png', '69.png', '70.png', '71.png'] },
 
-        title.innerText = data.n;
-        if (bread) bread.innerText = data.n;
-        viewer.src = rutaImagen;
+            'datos_del_previo_pago': { n: 'Datos del Previo Pago', img: ['72.png', '73.png', '74.png', '75.png'] },
+            'previo_pago_asignar_responsables': { n: 'Previo Pago-Asignar responsables', img: ['76.png', '77.png', '78.png'] },
+            'recurso_de_revisión': { n: 'Recurso de revisión', img: ['79.png', '80.png', '81.png', '82.png'] },
+            'responsable': { n: 'Asignar responsables recurso revisión', img: ['83.png', '84.png', '85.png'] },
+            'notificar_al_inai': { n: 'Notificar al INAI', img: ['86.png', '87.png', '88.png'] },
+            'sentido_de_resolución': { n: 'Sentido de resolución', img: ['89.png', '90.png', '91.png', '92.png', '93.png'] },
 
-        // Lógica Botón Anterior
-        btnAnterior.onclick = () => {
-            if (indexActual <= 0) {
-                window.location.href = 'PruebaINFOMEX.html';
-            } else {
-                window.location.href = `?tema=${claves[indexActual - 1]}`;
-            }
+            'orden_de_cumplimiento': { n: 'Orden de cumplimiento', img: ['94.png', '95.png', '96.png', '97.png'] },
+            'editar_folio_de_la_pnt': { n: 'Asignar folio PNT', img: '98.png' },
+            'desahogado': { n: 'Desahogado', img: '99.png' },
+            'notoria': { n: 'Notoria incompetencia', img: '99.png' },
+            'solARCOPSAI': { n: 'Solicitudes ARCOP y SAI', img: ['99.png', '100.png', '101.png'] },
+            'duplicada2': { n: 'Duplicada', img: '102.png' },
+            'solicitudes_arcop2': { n: 'Solicitudes ARCOP y SAI', img: ['102.png', '103.png', '104.png'] },
+
+            'desahogado3': { n: 'Desahogado', img: '105.png' },
+            'responder_solicitudes3': { n: 'Responder (Concluir) Solicitudes SAI', img: ['105.png', '106.png'] },
+
+
+            'expediente_virtual': { n: 'Búsqueda de Expedientes', img: ['107.png', '108.png'] },
+            'editar_folio_de_la_pnt2': { n: 'Editar folio de la PNT', img: '109.png' },
+            'ingre_numero_de_expediente': { n: 'Ingresar número de expediente', img: '110.png' },
+            'regenerar_expedientes': { n: 'Regenerar Expedientes', img: '111.png' },
+            'detalle_del_expediente_virtual': { n: 'Detalle del expediente virtual', img: ['112.png', '113.png'] },
+            'fecha_respuesta': { n: 'Actualizar fecha de respuesta de las áreas y la fecha de respuesta de la solicitud', img: ['114.png', '115.png', '116.png'] },
+            'solicitudes3': { n: 'Solicitudes', img: ['117.png', '118.png'] },
+            'respuestas_solicitudes3': { n: 'Respuestas solicitudes', img: ['119.png', '120.png'] },
+
+            'reportes_busqueda_general': { n: 'Búsqueda General', img: ['121.png', '122.png'] },
+            'reportes_busqueda_otros': { n: 'Búsqueda Otros', img: '123.png' },
+            'reportes_indicadores': { n: 'Indicadores', img: '124.png' },
+
+
+            'descarga': { n: 'Descarga', img: '125.png' },
+            'carga': { n: 'Carga', img: '126.png' },
+            'buscador_de_solicitudes_sai': { n: 'Buscador Solicitudes SAI', img: ['127.png', '128.png'] },
+            'buscador_de_solicitudes_arcop': { n: 'Buscador Solicitudes ARCOP', img: ['129.png', '130.png'] },
+            'informes': { n: 'Informes fijos', img: ['131.png', '132.png', '133.png'] },
+
+            'centro_de_ayuda': { n: 'Centro de Ayuda', img: '134.png' },
+            'notificaciones': { n: 'Notificaciones que recibe el usuario de parte del sistema', img: '135.png' },
+
+            // --- UT-GESTIÓN, ÁREAS RESPONSABLES, COMITÉ Y MÁS (STUBS) ---
+            'atender_solicitud': { n: 'Atender una solicitud', img: 'ar_1.png' },
+            'publica': { n: 'Responder - Pública', img: 'ar_2.png' },
+            'con_clasificacion': { n: 'Responder - Con clasificación', img: 'ar_3.png' },
+            'solicitar_req_sai': { n: 'Solicitar Requerimiento en SAI', img: 'ar_4.png' },
+            'ria': { n: 'Responder Requerimiento de Información Adicional (RIA)', img: 'ar_5.png' },
+            'sugerencia_turno': { n: 'Sugerencia de turno en ARCOP y SAI', img: 'ar_6.png' },
+            'registro_sesiones': { n: 'Registro de sesiones y resoluciones del comité', img: 'ct_1.png' },
+            'buscador_dp': { n: 'Buscador de Datos Personales e Información Reservada', img: 'ct_2.png' },
+            'repositorio_ct': { n: 'Repositorio del CT', img: 'ct_3.png' },
+            'baja_solicitud': { n: 'Dar de baja una solicitud', img: 'ct_4.png' },
+            'confirma_sobresee': { n: 'Sentido de resolución - Confirma y Sobresee', img: 'rev_1.png' },
+            'modifica_revoca': { n: 'Sentido de resolución - Modifica, Revoca y Ordena', img: 'rev_2.png' },
+            'notificar_orden': { n: 'Notificar orden de cumplimiento', img: 'rev_3.png' }
         };
 
-        // Lógica Botón Siguiente
-        btnSiguiente.onclick = () => {
-            if (indexActual < claves.length - 1) {
-                window.location.href = `?tema=${claves[indexActual + 1]}`;
-            } else {
-                alert("Has llegado al final de la guía.");
-            }
-        };
+        const claves = Object.keys(biblioteca);
+        const indexActual = claves.indexOf(temaId);
 
-        // Ocultar Siguiente si es el último tema
-        if (indexActual === claves.length - 1) {
-            btnSiguiente.style.visibility = 'hidden';
-        }
+        const container = document.getElementById('image-viewer-container');
+        const title = document.getElementById('titulo-doc');
+        const linkModulo = document.getElementById('link-modulo');
+        const bread = document.getElementById('bread-actual');
+        const btnAnterior = document.getElementById('btn-anterior');
+        const btnSiguiente = document.getElementById('btn-siguiente');
 
-        // Fetch para descarga
-        fetch(rutaImagen)
-            .then(response => response.ok ? response.blob() : Promise.reject())
-            .then(blob => {
-                const urlBlob = window.URL.createObjectURL(blob);
-                linkModulo.href = urlBlob;
-                const extension = data.img.split('.').pop();
-                const nombreLimpio = `Guia_${data.n.replace(/\s+/g, '_')}.${extension}`;
-                linkModulo.setAttribute('download', nombreLimpio);
-            })
-            .catch(() => {
-                linkModulo.href = rutaImagen;
-                linkModulo.setAttribute('download', data.img);
+        if (biblioteca[temaId]) {
+            const data = biblioteca[temaId];
+            title.innerText = data.n;
+            if (bread) bread.innerText = data.n;
+
+            // Limpiar contenedor
+            container.innerHTML = '';
+
+            // Convertir img a array si es un string para manejarlo uniformemente
+            const imagenes = Array.isArray(data.img) ? data.img : [data.img];
+            const primeraImagen = "img/" + imagenes[0];
+
+            // Cargar todas las imágenes
+            imagenes.forEach(nombreImg => {
+                const imgElement = document.createElement('img');
+                imgElement.src = "img/" + nombreImg;
+                imgElement.alt = data.n;
+                container.appendChild(imgElement);
             });
 
-    } else {
-        // Manejo de error si el tema no existe
-        title.innerText = "Error";
-        if (bread) bread.innerText = "No encontrado";
-        viewer.alt = "No se encontró la información.";
-        if (linkModulo) linkModulo.style.display = "none";
-        if (btnAnterior) btnAnterior.style.display = "none";
-        if (btnSiguiente) btnSiguiente.style.display = "none";
-    }
-</script>
+            // Lógica Botón Anterior
+            btnAnterior.onclick = () => {
+                if (indexActual <= 0) {
+                    window.location.href = 'PruebaINFOMEX.html';
+                } else {
+                    window.location.href = `?tema=${claves[indexActual - 1]}`;
+                }
+            };
+
+            // Lógica Botón Siguiente
+            btnSiguiente.onclick = () => {
+                if (indexActual < claves.length - 1) {
+                    window.location.href = `?tema=${claves[indexActual + 1]}`;
+                } else {
+                    alert("Has llegado al final de la guía.");
+                }
+            };
+
+            // Ocultar Siguiente si es el último tema
+            if (indexActual === claves.length - 1) {
+                btnSiguiente.style.visibility = 'hidden';
+            }
+
+            // Fetch para descarga (se usa la primera imagen del set)
+            fetch(primeraImagen)
+                .then(response => response.ok ? response.blob() : Promise.reject())
+                .then(blob => {
+                    const urlBlob = window.URL.createObjectURL(blob);
+                    linkModulo.href = urlBlob;
+                    const extension = imagenes[0].split('.').pop();
+                    const nombreLimpio = `Guia_${data.n.replace(/\s+/g, '_')}.${extension}`;
+                    linkModulo.setAttribute('download', nombreLimpio);
+                })
+                .catch(() => {
+                    linkModulo.href = primeraImagen;
+                    linkModulo.setAttribute('download', imagenes[0]);
+                });
+
+        } else {
+            // Manejo de error si el tema no existe
+            title.innerText = "Error";
+            if (bread) bread.innerText = "No encontrado";
+            container.innerHTML = '<p style="padding: 20px;">No se encontró la información.</p>';
+            if (linkModulo) linkModulo.style.display = "none";
+            if (btnAnterior) btnAnterior.style.display = "none";
+            if (btnSiguiente) btnSiguiente.style.display = "none";
+        }
+    </script>
 
 
 
-    </body>
+</body>
+
 </html>
