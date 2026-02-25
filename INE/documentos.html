@@ -22,6 +22,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            transition: background-color 0.4s ease;
         }
 
         /* 2. Header */
@@ -382,122 +383,116 @@
 
         const biblioteca = {
             // --- ADMINISTRACIÓN ---
-            'ingreso_al_sistema': { n: 'Ingreso al sistema', img: '4.png' },
-            'administración_de_cuentas': { n: 'Administración', img: ['5.png', '6.png'] },
-            'registra_a_un_usuario': { n: 'Registra a un usuario', img: ['5.png', '6.png'] },
-            'registra_a_un_usuario_de_partidos': { n: 'Registra a un usuario de Partidos Políticos', img: '7.png' },
-            'busca_usuarios_registrados': { n: 'Busca usuarios registrados', img: '8.png' },
-            'por_usu': { n: 'Búsqueda por Usuario', img: ['8.png', '9.png'] },
-            'por_rol': { n: 'Búsqueda por Rol', img: '10.png' },
+            'ingreso_al_sistema': { n: 'Ingreso al sistema', img: '4.png', mod: 'admin' },
+            'administración_de_cuentas': { n: 'Administración', img: ['5.png', '6.png'], mod: 'admin' },
+            'registra_a_un_usuario': { n: 'Registra a un usuario', img: ['5.png', '6.png'], mod: 'admin' },
+            'registra_a_un_usuario_de_partidos': { n: 'Registra a un usuario de Partidos Políticos', img: '7.png', mod: 'admin' },
+            'busca_usuarios_registrados': { n: 'Busca usuarios registrados', img: '8.png', mod: 'admin' },
+            'por_usu': { n: 'Búsqueda por Usuario', img: ['8.png', '9.png'], mod: 'admin' },
+            'por_rol': { n: 'Búsqueda por Rol', img: '10.png', mod: 'admin' },
 
-            'mov': { n: 'Movimientos en Administración de cuentas', img: '11.png' },
-            'bitácora_de_acceso_al_sistema': { n: 'Bitácora de acceso al sistema', img: '12.png' },
-            'bitácora_de_acciones_por_usuario': { n: 'Bitácora de acciones por usuario', img: '13.png' },
-            'roles': { n: 'Cambio de rol', img: '14.png' },
+            'mov': { n: 'Movimientos en Administración de cuentas', img: '11.png', mod: 'admin' },
+            'bitácora_de_acceso_al_sistema': { n: 'Bitácora de acceso al sistema', img: '12.png', mod: 'admin' },
+            'bitácora_de_acciones_por_usuario': { n: 'Bitácora de acciones por usuario', img: '13.png', mod: 'admin' },
+            'roles': { n: 'Cambio de rol', img: '14.png', mod: 'admin' },
 
-            'solicitudes': { n: 'Solicitudes manuales', img: ['15.png', '16.png'] },
-            'tipo_de_solicitud': { n: 'Tipo de solicitud', img: '17.png' },
-            'registro_de_solicitud': { n: 'Registro de solicitud', img: ['18.png', '19.png', '20.png'] },
+            'solicitudes': { n: 'Solicitudes manuales', img: ['15.png', '16.png'], mod: 'admin' },
+            'tipo_de_solicitud': { n: 'Tipo de solicitud', img: '17.png', mod: 'admin' },
+            'registro_de_solicitud': { n: 'Registro de solicitud', img: ['18.png', '19.png', '20.png'], mod: 'admin' },
 
-            'carga': { n: 'Carga solicitudes de la PNT', img: ['21.png', '22.png', '23.png', '24.png', '25.png'] },
-            'estatus_de_solicitudes': { n: 'Estatus de solicitudes', img: '26.png' },
-            'solicitudes_recibidas': { n: 'Solicitudes recibidas', img: ['27.png', '28.png'] },
-            'asignar_responsable': { n: 'Asignar responsables', img: ['29.png', '30.png', '31.png'] },
-            'retirar_el_turno_a_las_áreas': { n: 'Retirar turno a áreas - Solicitudes ARCOP', img: ['32.png', '33.png', '34.png'] },
-            'devolución_de_turno': { n: 'Devolución de turno', img: ['35.png', '36.png'] },
-            'responder': { n: 'Notoria incompetencia', img: ['37.png', '38.png', '39.png'] },
-            'duplicada': { n: 'Duplicada', img: ['40.png', '41.png'] },
-            'responsables': { n: 'Solicitar Requerimiento a áreas Responsables', img: ['42.png', '43.png'] },
-            'solicitar_requerimiento_al': { n: 'Requerimiento de Aclaración (RA)', img: '44.png' },
-            'requerimiento_intermedio_de': { n: 'Requerimiento Intermedio (RII)', img: '45.png' },
-            'solicitud_recurso_revision': { n: 'Solicitar Requerimiento a un recurso de revisión', img: ['46.png', '47.png', '48.png'] },
-            'arcop': { n: 'Solicitudes ARCOP', img: ['49.png', '50.png'] },
-            'solicitar_requerimiento_al': { n: 'Requerimiento de Aclaración (RA)', img: '51.png' },
-            'requerimiento_intermedio_de': { n: 'Requerimiento Intermedio de Información(RII)', img: '52.png' },
-            'solicitante': { n: 'Solicitudes de Acceso a la Información SAI', img: ['53.png', '54.png', '55.png'] },
-            'responder_requerimiento': { n: 'Responder Requerimiento a nombre del solicitante', img: ['56.png', '57.png', '58.png'] },
-            'solicitudes_arcop': { n: 'Vía Procedimental al solicitante - Solicitudes ARCOP', img: ['59.png', '60.png', '61.png'] },
-            'responder': { n: 'Responder Vía Procedimental a nombre del solicitante', img: ['62.png', '63.png'] },
-            'solicitudes_arcop': { n: 'Solicitar Prevención al solicitante', img: ['64.png', '65.png', '66.png'] },
-            'sai_y_arcop': { n: 'SAI y ARCOP', img: ['67.png', '68.png', '69.png', '70.png', '71.png'] },
+            'carga': { n: 'Carga solicitudes de la PNT', img: ['21.png', '22.png', '23.png', '24.png', '25.png'], mod: 'admin' },
+            'estatus_de_solicitudes': { n: 'Estatus de solicitudes', img: '26.png', mod: 'admin' },
+            'solicitudes_recibidas': { n: 'Solicitudes recibidas', img: ['27.png', '28.png'], mod: 'admin' },
+            'asignar_responsable': { n: 'Asignar responsables', img: ['29.png', '30.png', '31.png'], mod: 'admin' },
+            'retirar_el_turno_a_las_áreas': { n: 'Retirar turno a áreas - Solicitudes ARCOP', img: ['32.png', '33.png', '34.png'], mod: 'admin' },
+            'devolución_de_turno': { n: 'Devolución de turno', img: ['35.png', '36.png'], mod: 'admin' },
+            'responder': { n: 'Notoria incompetencia', img: ['37.png', '38.png', '39.png'], mod: 'admin' },
+            'duplicada': { n: 'Duplicada', img: ['40.png', '41.png'], mod: 'admin' },
+            'responsables': { n: 'Solicitar Requerimiento a áreas Responsables', img: ['42.png', '43.png'], mod: 'admin' },
+            'solicitar_requerimiento_al': { n: 'Requerimiento de Aclaración (RA)', img: '44.png', mod: 'admin' },
+            'requerimiento_intermedio_de': { n: 'Requerimiento Intermedio (RII)', img: '45.png', mod: 'admin' },
+            'solicitud_recurso_revision': { n: 'Solicitar Requerimiento a un recurso de revisión', img: ['46.png', '47.png', '48.png'], mod: 'admin' },
+            'arcop': { n: 'Solicitudes ARCOP', img: ['49.png', '50.png'], mod: 'admin' },
+            'solicitante': { n: 'Solicitudes de Acceso a la Información SAI', img: ['53.png', '54.png', '55.png'], mod: 'admin' },
+            'responder_requerimiento': { n: 'Responder Requerimiento a nombre del solicitante', img: ['56.png', '57.png', '58.png'], mod: 'admin' },
+            'solicitudes_arcop': { n: 'Vía Procedimental al solicitante - Solicitudes ARCOP', img: ['59.png', '60.png', '61.png'], mod: 'admin' },
+            'sai_y_arcop': { n: 'SAI y ARCOP', img: ['67.png', '68.png', '69.png', '70.png', '71.png'], mod: 'admin' },
 
-            'datos_del_previo_pago': { n: 'Datos del Previo Pago', img: ['72.png', '73.png', '74.png', '75.png'] },
-            'previo_pago_asignar_responsables': { n: 'Previo Pago-Asignar responsables', img: ['76.png', '77.png', '78.png'] },
-            'recurso_de_revisión': { n: 'Recurso de revisión', img: ['79.png', '80.png', '81.png', '82.png'] },
-            'responsable': { n: 'Asignar responsables recurso revisión', img: ['83.png', '84.png', '85.png'] },
-            'notificar_al_inai': { n: 'Notificar al INAI', img: ['86.png', '87.png', '88.png'] },
-            'sentido_de_resolución': { n: 'Sentido de resolución', img: ['89.png', '90.png', '91.png', '92.png', '93.png'] },
+            'datos_del_previo_pago': { n: 'Datos del Previo Pago', img: ['72.png', '73.png', '74.png', '75.png'], mod: 'admin' },
+            'previo_pago_asignar_responsables': { n: 'Previo Pago-Asignar responsables', img: ['76.png', '77.png', '78.png'], mod: 'admin' },
+            'recurso_de_revisión': { n: 'Recurso de revisión', img: ['79.png', '80.png', '81.png', '82.png'], mod: 'admin' },
+            'responsable': { n: 'Asignar responsables recurso revisión', img: ['83.png', '84.png', '85.png'], mod: 'admin' },
+            'notificar_al_inai': { n: 'Notificar al INAI', img: ['86.png', '87.png', '88.png'], mod: 'admin' },
+            'sentido_de_resolución': { n: 'Sentido de resolución', img: ['89.png', '90.png', '91.png', '92.png', '93.png'], mod: 'admin' },
 
-            'orden_de_cumplimiento': { n: 'Orden de cumplimiento', img: ['94.png', '95.png', '96.png', '97.png'] },
-            'editar_folio_de_la_pnt': { n: 'Asignar folio PNT', img: '98.png' },
-            'desahogado': { n: 'Desahogado', img: '99.png' },
-            'notoria': { n: 'Notoria incompetencia', img: '99.png' },
-            'solARCOPSAI': { n: 'Solicitudes ARCOP y SAI', img: ['99.png', '100.png', '101.png'] },
-            'duplicada2': { n: 'Duplicada', img: '102.png' },
-            'solicitudes_arcop2': { n: 'Solicitudes ARCOP y SAI', img: ['102.png', '103.png', '104.png'] },
+            'orden_de_cumplimiento': { n: 'Orden de cumplimiento', img: ['94.png', '95.png', '96.png', '97.png'], mod: 'admin' },
+            'editar_folio_de_la_pnt': { n: 'Asignar folio PNT', img: '98.png', mod: 'admin' },
+            'desahogado': { n: 'Desahogado', img: '99.png', mod: 'admin' },
+            'notoria': { n: 'Notoria incompetencia', img: '99.png', mod: 'admin' },
+            'solARCOPSAI': { n: 'Solicitudes ARCOP y SAI', img: ['99.png', '100.png', '101.png'], mod: 'admin' },
+            'duplicada2': { n: 'Duplicada', img: '102.png', mod: 'admin' },
+            'solicitudes_arcop2': { n: 'Solicitudes ARCOP y SAI', img: ['102.png', '103.png', '104.png'], mod: 'admin' },
 
-            'desahogado3': { n: 'Desahogado', img: '105.png' },
-            'responder_solicitudes3': { n: 'Responder (Concluir) Solicitudes SAI', img: ['105.png', '106.png'] },
+            'desahogado3': { n: 'Desahogado', img: '105.png', mod: 'admin' },
+            'responder_solicitudes3': { n: 'Responder (Concluir) Solicitudes SAI', img: ['105.png', '106.png'], mod: 'admin' },
 
+            'expediente_virtual': { n: 'Búsqueda de Expedientes', img: ['107.png', '108.png'], mod: 'admin' },
+            'editar_folio_de_la_pnt2': { n: 'Editar folio de la PNT', img: '109.png', mod: 'admin' },
+            'ingre_numero_de_expediente': { n: 'Ingresar número de expediente', img: '110.png', mod: 'admin' },
+            'regenerar_expedientes': { n: 'Regenerar Expedientes', img: '111.png', mod: 'admin' },
+            'detalle_del_expediente_virtual': { n: 'Detalle del expediente virtual', img: ['112.png', '113.png'], mod: 'admin' },
+            'fecha_respuesta': { n: 'Actualizar fecha de respuesta de las áreas y la fecha de respuesta de la solicitud', img: ['114.png', '115.png', '116.png'], mod: 'admin' },
+            'solicitudes3': { n: 'Solicitudes', img: ['117.png', '118.png'], mod: 'admin' },
+            'respuestas_solicitudes3': { n: 'Respuestas solicitudes', img: ['119.png', '120.png'], mod: 'admin' },
 
-            'expediente_virtual': { n: 'Búsqueda de Expedientes', img: ['107.png', '108.png'] },
-            'editar_folio_de_la_pnt2': { n: 'Editar folio de la PNT', img: '109.png' },
-            'ingre_numero_de_expediente': { n: 'Ingresar número de expediente', img: '110.png' },
-            'regenerar_expedientes': { n: 'Regenerar Expedientes', img: '111.png' },
-            'detalle_del_expediente_virtual': { n: 'Detalle del expediente virtual', img: ['112.png', '113.png'] },
-            'fecha_respuesta': { n: 'Actualizar fecha de respuesta de las áreas y la fecha de respuesta de la solicitud', img: ['114.png', '115.png', '116.png'] },
-            'solicitudes3': { n: 'Solicitudes', img: ['117.png', '118.png'] },
-            'respuestas_solicitudes3': { n: 'Respuestas solicitudes', img: ['119.png', '120.png'] },
+            'reportes_busqueda_general': { n: 'Búsqueda General', img: ['121.png', '122.png'], mod: 'admin' },
+            'reportes_busqueda_otros': { n: 'Búsqueda Otros', img: '123.png', mod: 'admin' },
+            'reportes_indicadores': { n: 'Indicadores', img: '124.png', mod: 'admin' },
 
-            'reportes_busqueda_general': { n: 'Búsqueda General', img: ['121.png', '122.png'] },
-            'reportes_busqueda_otros': { n: 'Búsqueda Otros', img: '123.png' },
-            'reportes_indicadores': { n: 'Indicadores', img: '124.png' },
+            'descarga': { n: 'Descarga', img: '125.png', mod: 'admin' },
+            'carga': { n: 'Carga', img: '126.png', mod: 'admin' },
+            'buscador_de_solicitudes_sai': { n: 'Buscador Solicitudes SAI', img: ['127.png', '128.png'], mod: 'admin' },
+            'buscador_de_solicitudes_arcop': { n: 'Buscador Solicitudes ARCOP', img: ['129.png', '130.png'], mod: 'admin' },
+            'informes': { n: 'Informes fijos', img: ['131.png', '132.png', '133.png'], mod: 'admin' },
 
-
-            'descarga': { n: 'Descarga', img: '125.png' },
-            'carga': { n: 'Carga', img: '126.png' },
-            'buscador_de_solicitudes_sai': { n: 'Buscador Solicitudes SAI', img: ['127.png', '128.png'] },
-            'buscador_de_solicitudes_arcop': { n: 'Buscador Solicitudes ARCOP', img: ['129.png', '130.png'] },
-            'informes': { n: 'Informes fijos', img: ['131.png', '132.png', '133.png'] },
-
-            'centro_de_ayuda': { n: 'Centro de Ayuda', img: '134.png' },
-            'notificaciones': { n: 'Notificaciones que recibe el usuario de parte del sistema', img: '135.png' },
+            'centro_de_ayuda': { n: 'Centro de Ayuda', img: '134.png', mod: 'admin' },
+            'notificaciones': { n: 'Notificaciones que recibe el usuario de parte del sistema', img: '135.png', mod: 'admin' },
 
             // --- UT-GESTIÓN
-            '1': { n: 'Ingreso al sistema', img: 'img2/4.png' },
-            '2': { n: 'Solicitudes manuales', img: ['img2/5.png', 'img2/6.png'] },
-            '3': { n: 'Tipo de solicitud', img: 'img2/7.png' }, 
-            '4': { n: 'Registro de solicitud', img: ['img2/8.png', 'img2/9.png', 'img2/10.png'] },
-            '5': { n: 'Carga solicitudes de la Plataforma Nacional de Transparencia', img: ['img2/11.png', 'img2/12.png', 'img2/13.png', 'img2/14.png', 'img2/15.png'] },
-            '6': { n: 'Estatus de solicitudes', img: 'img2/16.png' },
-            '7': { n: 'Solicitudes recibidas', img: ['img2/17.png', 'img2/18.png'] },
-            '8': { n: 'Asignar responsable', img: ['img2/19.png', 'img2/20.png', 'img2/21.png'] },
-            '9': { n: 'Retirar el turno a las áreas responsables', img: ['img2/22.png', 'img2/23.png', 'img2/24.png'] },
-            '10': { n: 'Devolución de turno', img: ['img2/25.png', 'img2/26.png'] },
-            '11': { n: 'Notoria incompetencia', img: ['img2/27.png', 'img2/28.png', 'img2/29.png'] },
-            '12': { n: 'Duplicada', img: ['img2/30.png', 'img2/31.png'] },
+            '1': { n: 'Ingreso al sistema', img: 'img2/4.png', mod: 'ut' },
+            '2': { n: 'Solicitudes manuales', img: ['img2/5.png', 'img2/6.png'], mod: 'ut' },
+            '3': { n: 'Tipo de solicitud', img: 'img2/7.png', mod: 'ut' },
+            '4': { n: 'Registro de solicitud', img: ['img2/8.png', 'img2/9.png', 'img2/10.png'], mod: 'ut' },
+            '5': { n: 'Carga solicitudes de la Plataforma Nacional de Transparencia', img: ['img2/11.png', 'img2/12.png', 'img2/13.png', 'img2/14.png', 'img2/15.png'], mod: 'ut' },
+            '6': { n: 'Estatus de solicitudes', img: 'img2/16.png', mod: 'ut' },
+            '7': { n: 'Solicitudes recibidas', img: ['img2/17.png', 'img2/18.png'], mod: 'ut' },
+            '8': { n: 'Asignar responsable', img: ['img2/19.png', 'img2/20.png', 'img2/21.png'], mod: 'ut' },
+            '9': { n: 'Retirar el turno a las áreas responsables', img: ['img2/22.png', 'img2/23.png', 'img2/24.png'], mod: 'ut' },
+            '10': { n: 'Devolución de turno', img: ['img2/25.png', 'img2/26.png'], mod: 'ut' },
+            '11': { n: 'Notoria incompetencia', img: ['img2/27.png', 'img2/28.png', 'img2/29.png'], mod: 'ut' },
+            '12': { n: 'Duplicada', img: ['img2/30.png', 'img2/31.png'], mod: 'ut' },
 
-            '13': { n: 'Requerimiento de Aclaración (RA)', img: ['img2/32.png', 'img2/33.png', 'img2/34.png'] },
-            '14': { n: 'Requerimiento Intermedio de Información (RII)', img: 'img2/35.png' },
-            '15': { n: 'Solicitar requerimiento a un recurso de revisión', img: ['img2/36.png', 'img2/37.png', 'img2/38.png'] },
-            '16': { n: 'Requerimiento de Aclaración (RA)', img: ['img2/39.png', 'img2/40.png', 'img2/41.png'] },
-            '17': { n: 'Requerimiento Intermedio de Información (RII)', img: 'img2/42.png' },
-            '18': { n: 'Solicitar Requerimiento al solicitante', img: ['img2/43.png', 'img2/44.png', 'img2/45.png'] },
-            '19': { n: 'Responder Requerimiento a nombre del responsable', img: ['img2/46.png', 'img2/47.png', 'img2/48.png'] },
-            '20': { n: 'Solicitar Vía Procedimental al solicitante', img: ['img2/49.png', 'img2/50.png', 'img2/51.png'] },
-            '21': { n: 'Responder Vía procedimental a nombre del solicitante', img: ['img2/52.png', 'img2/53.png'] },
-            '22': { n: 'Solicitar Prevención al solicitante', img: ['img2/54.png', 'img2/55.png', 'img2/56.png'] },
-            '23': { n: 'Responder solicitudes', img: ['img2/57.png', 'img2/58.png', 'img2/59.png', 'img2/60.png', 'img2/61.png'] },
-            '24': { n: 'Previo Pago-Asignar responsables', img: ['img2/62.png', 'img2/63.png', 'img2/64.png', 'img2/65.png', 'img2/66.png', 'img2/67.png', 'img2/68.png'] },
-            '25': { n: 'Asignación Previo Pago', img: ['img2/69.png', 'img2/70.png'] },
-            '26': { n: 'Asignar responsable al recurso de revisión', img: ['img2/71.png', 'img2/72.png', 'img2/73.png', 'img2/74.png', 'img2/75.png', 'img2/76.png', 'img2/77.png'] },
-            '27': { n: 'Notificar al INAI', img: ['img2/78.png', 'img2/79.png', 'img2/80.png'] },
-            '28': { n: 'Sentido de resolución', img: ['img2/81.png', 'img2/82.png','img2/83.png', 'img2/84.png', 'img2/85.png'] }, 
-            '29': { n: 'Orden de cumplimiento', img: ['img2/86.png', 'img2/87.png','img2/88.png', 'img2/89.png'] }, 
-            '30': { n: 'Asignar folio PNT', img: 'img2/90.png' },
-            '31': { n: 'Notoria incompetencia', img: ['img2/91.png', 'img2/92.png', 'img2/93.png'] },
-            '32': { n: 'Duplicada', img: ['img2/94.png', 'img2/95.png'] },
-            '33': { n: 'Responder (concluir)', img: ['img2/96.png', 'img2/97.png', 'img2/98.png'] }
+            '13': { n: 'Requerimiento de Aclaración (RA)', img: ['img2/32.png', 'img2/33.png', 'img2/34.png'], mod: 'ut' },
+            '14': { n: 'Requerimiento Intermedio de Información (RII)', img: 'img2/35.png', mod: 'ut' },
+            '15': { n: 'Solicitar requerimiento a un recurso de revisión', img: ['img2/36.png', 'img2/37.png', 'img2/38.png'], mod: 'ut' },
+            '16': { n: 'Requerimiento de Aclaración (RA)', img: ['img2/39.png', 'img2/40.png', 'img2/41.png'], mod: 'ut' },
+            '17': { n: 'Requerimiento Intermedio de Información (RII)', img: 'img2/42.png', mod: 'ut' },
+            '18': { n: 'Solicitar Requerimiento al solicitante', img: ['img2/43.png', 'img2/44.png', 'img2/45.png'], mod: 'ut' },
+            '19': { n: 'Responder Requerimiento a nombre del responsable', img: ['img2/46.png', 'img2/47.png', 'img2/48.png'], mod: 'ut' },
+            '20': { n: 'Solicitar Vía Procedimental al solicitante', img: ['img2/49.png', 'img2/50.png', 'img2/51.png'], mod: 'ut' },
+            '21': { n: 'Responder Vía procedimental a nombre del solicitante', img: ['img2/52.png', 'img2/53.png'], mod: 'ut' },
+            '22': { n: 'Solicitar Prevención al solicitante', img: ['img2/54.png', 'img2/55.png', 'img2/56.png'], mod: 'ut' },
+            '23': { n: 'Responder solicitudes', img: ['img2/57.png', 'img2/58.png', 'img2/59.png', 'img2/60.png', 'img2/61.png'], mod: 'ut' },
+            '24': { n: 'Previo Pago-Asignar responsables', img: ['img2/62.png', 'img2/63.png', 'img2/64.png', 'img2/65.png', 'img2/66.png', 'img2/67.png', 'img2/68.png'], mod: 'ut' },
+            '25': { n: 'Asignación Previo Pago', img: ['img2/69.png', 'img2/70.png'], mod: 'ut' },
+            '26': { n: 'Asignar responsable al recurso de revisión', img: ['img2/71.png', 'img2/72.png', 'img2/73.png', 'img2/74.png', 'img2/75.png', 'img2/76.png', 'img2/77.png'], mod: 'ut' },
+            '27': { n: 'Notificar al INAI', img: ['img2/78.png', 'img2/79.png', 'img2/80.png'], mod: 'ut' },
+            '28': { n: 'Sentido de resolución', img: ['img2/81.png', 'img2/82.png', 'img2/83.png', 'img2/84.png', 'img2/85.png'], mod: 'ut' },
+            '29': { n: 'Orden de cumplimiento', img: ['img2/86.png', 'img2/87.png', 'img2/88.png', 'img2/89.png'], mod: 'ut' },
+            '30': { n: 'Asignar folio PNT', img: 'img2/90.png', mod: 'ut' },
+            '31': { n: 'Notoria incompetencia', img: ['img2/91.png', 'img2/92.png', 'img2/93.png'], mod: 'ut' },
+            '32': { n: 'Duplicada', img: ['img2/94.png', 'img2/95.png'], mod: 'ut' },
+            '33': { n: 'Responder (concluir)', img: ['img2/96.png', 'img2/97.png', 'img2/98.png'], mod: 'ut' }
         };
 
         const claves = Object.keys(biblioteca);
@@ -514,6 +509,19 @@
             const data = biblioteca[temaId];
             title.innerText = data.n;
             if (bread) bread.innerText = data.n;
+
+            // Actualizar color de fondo según el módulo
+            const mapaColores = {
+                'admin': '#eeeaf1',
+                'ut': '#ecf5f6',
+                'ar': '#fbe6f2',
+                'ct': '#f9f4f6',
+                'rev': '#fafafa',
+                'con': '#fcffff'
+            };
+            if (data.mod && mapaColores[data.mod]) {
+                document.body.style.backgroundColor = mapaColores[data.mod];
+            }
 
             // Limpiar contenedor
             container.innerHTML = '';
@@ -591,4 +599,3 @@
 </body>
 
 </html>
-
