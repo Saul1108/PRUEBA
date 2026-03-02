@@ -157,7 +157,8 @@
             transition: max-height 0.4s ease;
         }
 
-        .menu-item:hover .dropdown-level-1 {
+        /* Nivel 1 abierto via JS (clic o teclado) */
+        .menu-item.is-open>.dropdown-level-1 {
             max-height: 1200px;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
@@ -178,8 +179,10 @@
             align-items: center;
         }
 
-        .submenu-trigger:hover {
+        .submenu-trigger:hover,
+        .submenu-trigger:focus-visible {
             background-color: rgba(255, 255, 255, 0.1);
+            outline: none;
         }
 
         .submenu-trigger::after {
@@ -191,6 +194,12 @@
         .submenu-trigger.active::after {
             content: '-';
             transform: rotate(180deg);
+        }
+
+        /* Foco visible en .main-button (nivel 0) */
+        .main-button:focus-visible {
+            outline: 3px solid #34a8f3;
+            outline-offset: -3px;
         }
 
         .dropdown-level-2 {
@@ -215,10 +224,12 @@
             text-align: left;
         }
 
-        .dropdown-level-2 a:hover {
+        .dropdown-level-2 a:hover,
+        .dropdown-level-2 a:focus-visible {
             background-color: rgba(255, 255, 255, 0.5);
             padding-left: 45px;
             font-weight: 700;
+            outline: none;
         }
 
         /* --- BOTÓN ANTERIOR: mismo marco que el contenido --- */
@@ -393,12 +404,79 @@
     </footer>
 
     <script>
-        // Manejo de clics para sub-menús
-        document.querySelectorAll('.submenu-trigger').forEach(button => {
-            button.addEventListener('click', () => {
-                const targetMenu = button.nextElementSibling;
+        // ---- NIVEL 1: .main-button abre/cierra .dropdown-level-1 (clic + teclado) ----
+        document.querySelectorAll('.menu-item').forEach(function (item) {
+            var mainBtn = item.querySelector('.main-button');
+            if (!mainBtn) return;
+
+            // Hacer el div enfocable con teclado
+            mainBtn.setAttribute('tabindex', '0');
+            mainBtn.setAttribute('role', 'button');
+            mainBtn.style.cursor = 'pointer';
+
+            function toggleLevel1(e) {
+                e.stopPropagation();
+                var isOpen = item.classList.contains('is-open');
+
+                // Cerrar todos los demás ítems abiertos
+                document.querySelectorAll('.menu-item.is-open').forEach(function (other) {
+                    if (other !== item) {
+                        other.classList.remove('is-open');
+                        // Cerrar también los sub-menús de nivel 2 dentro del que se cierra
+                        other.querySelectorAll('.dropdown-level-2.active').forEach(function (d2) {
+                            d2.classList.remove('active');
+                        });
+                        other.querySelectorAll('.submenu-trigger.active').forEach(function (t) {
+                            t.classList.remove('active');
+                        });
+                    }
+                });
+
+                // Alternar el actual
+                if (isOpen) {
+                    item.classList.remove('is-open');
+                } else {
+                    item.classList.add('is-open');
+                }
+            }
+
+            mainBtn.addEventListener('click', toggleLevel1);
+
+            mainBtn.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleLevel1(e);
+                }
+                if (e.key === 'Escape') {
+                    item.classList.remove('is-open');
+                    mainBtn.focus();
+                }
+            });
+        });
+
+        // ---- NIVEL 2: .submenu-trigger abre/cierra .dropdown-level-2 (clic + teclado) ----
+        document.querySelectorAll('.submenu-trigger').forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var targetMenu = button.nextElementSibling;
                 button.classList.toggle('active');
                 targetMenu.classList.toggle('active');
+            });
+
+            button.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    var targetMenu = button.nextElementSibling;
+                    button.classList.remove('active');
+                    targetMenu.classList.remove('active');
+                    button.focus();
+                }
+            });
+        });
+
+        // Cerrar nivel 1 al hacer clic fuera
+        document.addEventListener('click', function () {
+            document.querySelectorAll('.menu-item.is-open').forEach(function (item) {
+                item.classList.remove('is-open');
             });
         });
     </script>
