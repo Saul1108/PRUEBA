@@ -97,46 +97,40 @@
             padding: 0 40px 60px;
         }
 
-        /* 3. MIGAJAS DE PAN (CORREGIDAS) */
+        /* --- BREADCRUMBS --- */
         .breadcrumb-container {
-
             width: 100%;
             align-self: stretch;
-            /* ocupa el mismo ancho que el título */
             margin-top: 30px;
-            /* separación con el header */
             margin-bottom: 12px;
-            /* más pegado al título */
         }
 
-
-        .breadcrumbs {
+        .breadcrumbs-nav {
             font-family: 'Roboto', sans-serif;
-            font-size: 12px;
-            /* Tamaño exacto */
+            font-size: 15px;
             color: #666;
+            display: flex;
+            justify-content: flex-start;
             text-align: left;
         }
 
-        .breadcrumbs a {
-            color: #321b44;
+        .breadcrumbs-nav a {
+            color: #000000;
             text-decoration: none;
-            font-weight: 400;
+            font-weight: 500;
         }
 
-        .breadcrumbs a:hover {
+        .breadcrumbs-nav a:hover {
             text-decoration: underline;
-            /* Subrayado al pasar el mouse */
         }
 
-        .breadcrumbs span {
+        .breadcrumbs-nav span {
             margin: 0 8px;
             color: #999;
         }
 
-        .breadcrumbs b {
-            font-weight: 400;
-            color: #666;
+        .breadcrumbs-nav b {
+            color: #000000;
         }
 
         /* 4. Contenido Principal */
@@ -272,7 +266,7 @@
             outline: none;
             box-shadow: none;
 
-            color: #321b44;
+            color: #000000;
             font-size: 1.1em;
             font-weight: 400;
             display: inline-flex;
@@ -325,7 +319,7 @@
     <main class="main-content">
 
         <div class="breadcrumb-container">
-            <nav class="breadcrumbs">
+            <nav class="breadcrumbs-nav">
                 <a href="index.html">Inicio</a> <span>/</span>
                 <a href="PruebaINFOMEX.html">Guía de usuario</a> <span>/</span>
                 <b id="bread-actual">Cargando...</b>
@@ -507,8 +501,8 @@
             '46': { n: 'Informes fijos', img: ['img2/116.png', 'img2/117.png', 'img2/118.png'], mod: 'ut' },
             '47': { n: 'Centro de Ayuda', img: 'img2/119.png', mod: 'ut' },
             '48': { n: 'Notificaciones que recibe el usuario del parte del sistema', img: ['img2/120.png', 'img2/121.png', 'img2/122.png'], mod: 'ut' },
-            
-            
+
+
             // --- AREAS RESPONSABLES
             '49': { n: 'Atender una solicitud', img: ['img3/3.png', 'img3/4.png'], mod: 'ar' },
             '50': { n: 'Pública', img: ['img3/5.png', 'img3/6.png', 'img3/7.png'], mod: 'ar' },
@@ -533,7 +527,7 @@
             '69': { n: 'Centro de Ayuda', img: 'img3/46.png', mod: 'ar' },
             '70': { n: 'Notificaciones que recibe el usuario de parte del sistema', img: 'img3/47.png', mod: 'ar' },
 
-        // --- COMITÉ DE TRANSPARENCIA
+            // --- COMITÉ DE TRANSPARENCIA
             '71': { n: 'Ingreso al sistema', img: 'img4/3.png', mod: 'ct' },
             '72': { n: 'Responder solicitudes que requieren pronunciamiento del Comité de Transparencia', img: ['img4/4.png', 'img4/5.png', 'img4/6.png', 'img4/7.png'], mod: 'ct' },
             '73': { n: 'Responder solicitud de ampliación de plazo', img: 'img4/8.png', mod: 'ct' },
@@ -547,7 +541,7 @@
             '81': { n: 'Vigente', img: 'img4/15.png', mod: 'ct' },
             '82': { n: 'Histórica', img: 'img4/16.png', mod: 'ct' },
             '83': { n: 'Documentos testados', img: 'img4/17.png', mod: 'ct' },
-            '84': { n: 'Administración de Información', img: ['img4/18.png', 'img4/19.png', 'img4/20.png',, 'img4/21.png', 'img4/22.png'], mod: 'ct' },
+            '84': { n: 'Administración de Información', img: ['img4/18.png', 'img4/19.png', 'img4/20.png', , 'img4/21.png', 'img4/22.png'], mod: 'ct' },
             '85': { n: 'Búsqueda de Expedientes', img: ['img4/23.png', 'img4/24.png'], mod: 'ct' },
             '86': { n: 'Editar folio de la PNT', img: 'img4/25.png', mod: 'ct' },
             '87': { n: 'Ingresar número de expediente', img: 'img4/26.png', mod: 'ct' },
