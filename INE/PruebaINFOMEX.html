@@ -138,11 +138,11 @@
 
         .nav-btn i {
             font-size: 1.8em;
-            color: #000000;
+
         }
 
         .nav-btn:hover {
-            opacity: 0.7;
+            color: #34a8f3;
         }
 
         /* --- OPCIONES DE NAVEGACIÓN (TABS) --- */
@@ -257,7 +257,7 @@
             text-decoration: none;
         }
 
-        .menu-item:hover {
+        .menu-item.is-open {
             background-color: #452a5a;
             /* Default */
         }
@@ -271,7 +271,7 @@
             transition: max-height 0.4s ease;
         }
 
-        .menu-item:hover .dropdown-content {
+        .dropdown-content.open {
             max-height: 500px;
             border-top: 1px solid rgba(255, 255, 255, 0.3);
         }
@@ -549,6 +549,14 @@
             <!-- Script para Tabs -->
             <script>
                 function showTab(tabId, btn) {
+                    // Cerrar todos los dropdowns al cambiar de pestaña
+                    document.querySelectorAll('.dropdown-content.open').forEach(function (d) {
+                        d.classList.remove('open');
+                    });
+                    document.querySelectorAll('.menu-item.is-open').forEach(function (m) {
+                        m.classList.remove('is-open');
+                    });
+
                     // Ocultar todos los tabs
                     var contents = document.getElementsByClassName('tab-content');
                     for (var i = 0; i < contents.length; i++) {
@@ -597,6 +605,41 @@
                             container.classList.add('content-grid');
                         }
                     }
+
+                    // Dropdowns: solo abrir al hacer clic, comportamiento exclusivo
+                    document.querySelectorAll('.has-dropdown .main-button').forEach(function (btn) {
+                        btn.style.cursor = 'pointer';
+                        btn.addEventListener('click', function (e) {
+                            e.stopPropagation();
+                            var parent = btn.closest('.menu-item');
+                            var dropdown = parent.querySelector('.dropdown-content');
+                            var isOpen = dropdown.classList.contains('open');
+
+                            // Cerrar todos los dropdowns abiertos
+                            document.querySelectorAll('.dropdown-content.open').forEach(function (d) {
+                                d.classList.remove('open');
+                            });
+                            document.querySelectorAll('.menu-item.is-open').forEach(function (m) {
+                                m.classList.remove('is-open');
+                            });
+
+                            // Abrir el actual solo si estaba cerrado
+                            if (!isOpen) {
+                                dropdown.classList.add('open');
+                                parent.classList.add('is-open');
+                            }
+                        });
+                    });
+
+                    // Cerrar dropdowns al hacer clic fuera
+                    document.addEventListener('click', function () {
+                        document.querySelectorAll('.dropdown-content.open').forEach(function (d) {
+                            d.classList.remove('open');
+                        });
+                        document.querySelectorAll('.menu-item.is-open').forEach(function (m) {
+                            m.classList.remove('is-open');
+                        });
+                    });
                 });
             </script>
 
@@ -964,15 +1007,21 @@
                             </div>
                             <div class="menu-item has-dropdown">
                                 <div class="main-button">Expediente virtual</div>
-                                <div class="dropdown-content"><a href="documentos.html?tema=34">Búsqueda de Expedientes</a></div>
-                                <div class="dropdown-content"><a href="documentos.html?tema=35">Editar folio de la PNT</a></div>
-                                <div class="dropdown-content"><a href="documentos.html?tema=36">Ingresar número de expediente</a></div>
-                                <div class="dropdown-content"><a href="documentos.html?tema=37">Regenerar Expedientes</a></div>
-                                <div class="dropdown-content"><a href="documentos.html?tema=38">Detalle del expediente virtual</a></div>
+                                <div class="dropdown-content"><a href="documentos.html?tema=34">Búsqueda de
+                                        Expedientes</a></div>
+                                <div class="dropdown-content"><a href="documentos.html?tema=35">Editar folio de la
+                                        PNT</a></div>
+                                <div class="dropdown-content"><a href="documentos.html?tema=36">Ingresar número de
+                                        expediente</a></div>
+                                <div class="dropdown-content"><a href="documentos.html?tema=37">Regenerar
+                                        Expedientes</a></div>
+                                <div class="dropdown-content"><a href="documentos.html?tema=38">Detalle del expediente
+                                        virtual</a></div>
                             </div>
                             <div class="menu-item has-dropdown">
                                 <div class="main-button">Reportes</div>
-                                <div class="dropdown-content"><a href="documentos.html?tema=39">Búsqueda General</a></div>
+                                <div class="dropdown-content"><a href="documentos.html?tema=39">Búsqueda General</a>
+                                </div>
                                 <div class="dropdown-content"><a href="documentos.html?tema=40">Búsqueda Otros</a></div>
                                 <div class="dropdown-content"><a href="documentos.html?tema=41">Indicadores</a></div>
                             </div>
@@ -985,15 +1034,19 @@
                             </div>
                             <div class="menu-item has-dropdown">
                                 <div class="main-button">Motor de folios asignados por áreas</div>
-                                <div class="dropdown-content"><a href="documentos.html?tema=44">Buscador de Solicitudes SAI</a></div>
-                                <div class="dropdown-content"><a href="documentos.html?tema=45">Buscador de Solicitudes ARCOP</a></div>
+                                <div class="dropdown-content"><a href="documentos.html?tema=44">Buscador de Solicitudes
+                                        SAI</a></div>
+                                <div class="dropdown-content"><a href="documentos.html?tema=45">Buscador de Solicitudes
+                                        ARCOP</a></div>
                             </div>
                             <div class="menu-item has-dropdown">
                                 <div class="main-button">Informes</div>
                                 <div class="dropdown-content"><a href="documentos.html?tema=46">Informes fijos</a></div>
                             </div>
-                            <div class="menu-item"><a href="documentos.html?tema=47" class="main-button">Centro de Ayuda</a></div>
-                            <div class="menu-item"><a href="documentos.html?tema=48" class="main-button">Notificaciones que recibe el usuario
+                            <div class="menu-item"><a href="documentos.html?tema=47" class="main-button">Centro de
+                                    Ayuda</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=48" class="main-button">Notificaciones
+                                    que recibe el usuario
                                     de parte del sistema</a></div>
 
                         </div>
@@ -1008,7 +1061,8 @@
                     <div class="content-grid">
                         <!-- Columna 1 -->
                         <div class="column">
-                            <div class="menu-item"><a href="documentos.html?tema=49" class="main-button">Atender una solicitud</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=49" class="main-button">Atender una
+                                    solicitud</a></div>
                             <div class="menu-item has-dropdown">
                                 <div class="main-button">Responder</div>
                                 <div class="dropdown-content">
@@ -1017,11 +1071,14 @@
                                     <a href="documentos.html?tema=52">Con clasificación</a>
                                 </div>
                             </div>
-                            <div class="menu-item"><a href="documentos.html?tema=53" class="main-button">Solicitar Requerimiento en SAI</a>
+                            <div class="menu-item"><a href="documentos.html?tema=53" class="main-button">Solicitar
+                                    Requerimiento en SAI</a>
                             </div>
-                            <div class="menu-item"><a href="documentos.html?tema=54" class="main-button">Vía Procedimental solicitudes
+                            <div class="menu-item"><a href="documentos.html?tema=54" class="main-button">Vía
+                                    Procedimental solicitudes
                                     ARCOP</a></div>
-                            <div class="menu-item"><a href="documentos.html?tema=55" class="main-button">Responder Requerimiento de Aclaración
+                            <div class="menu-item"><a href="documentos.html?tema=55" class="main-button">Responder
+                                    Requerimiento de Aclaración
                                     (RA),
                                     Responder Requerimiento de Aclaración (RA), Responder Requerimiento de Aclaración
                                     (RA),
@@ -1030,16 +1087,21 @@
 
                         <!-- Columna 2 -->
                         <div class="column">
-                            <div class="menu-item"><a href="documentos.html?tema=56" class="main-button">Responder Requerimiento de
+                            <div class="menu-item"><a href="documentos.html?tema=56" class="main-button">Responder
+                                    Requerimiento de
                                     Información
                                     Adicional (RIA)</a></div>
-                            <div class="menu-item"><a href="documentos.html?tema=57" class="main-button">Sugerencia de turno en ARCOP y SAI
+                            <div class="menu-item"><a href="documentos.html?tema=57" class="main-button">Sugerencia de
+                                    turno en ARCOP y SAI
                                 </a></div>
-                            <div class="menu-item"><a href="documentos.html?tema=58" class="main-button">Responder Asignación Previo Pago</a>
+                            <div class="menu-item"><a href="documentos.html?tema=58" class="main-button">Responder
+                                    Asignación Previo Pago</a>
                             </div>
-                            <div class="menu-item"><a href="documentos.html?tema=59" class="main-button">Respuesta al Recurso de Revisión</a>
+                            <div class="menu-item"><a href="documentos.html?tema=59" class="main-button">Respuesta al
+                                    Recurso de Revisión</a>
                             </div>
-                            <div class="menu-item"><a href="documentos.html?tema=60" class="main-button">Responder orden de cumplimiento</a>
+                            <div class="menu-item"><a href="documentos.html?tema=60" class="main-button">Responder orden
+                                    de cumplimiento</a>
                             </div>
 
                             <div class="menu-item has-dropdown">
@@ -1069,14 +1131,19 @@
 
                             <div class="menu-item has-dropdown">
                                 <div class="main-button">Motor de folios asignados por áreas</div>
-                                <div class="dropdown-content"><a href="documentos.html?tema=66">Buscador de Solicitudes SAI</a></div>
-                                <div class="dropdown-content"><a href="documentos.html?tema=67">Buscador de Solicitudes ARCOP</a></div>
+                                <div class="dropdown-content"><a href="documentos.html?tema=66">Buscador de Solicitudes
+                                        SAI</a></div>
+                                <div class="dropdown-content"><a href="documentos.html?tema=67">Buscador de Solicitudes
+                                        ARCOP</a></div>
                             </div>
 
 
-                            <div class="menu-item"><a href="documentos.html?tema=68" class="main-button">Estatus de las solicitudes</a></div>
-                            <div class="menu-item"><a href="documentos.html?tema=69" class="main-button">Centro de Ayuda</a></div>
-                            <div class="menu-item"><a href="documentos.html?tema=70" class="main-button">Notificaciones que recibe el usuario
+                            <div class="menu-item"><a href="documentos.html?tema=68" class="main-button">Estatus de las
+                                    solicitudes</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=69" class="main-button">Centro de
+                                    Ayuda</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=70" class="main-button">Notificaciones
+                                    que recibe el usuario
                                     de parte
                                     del sistema</a></div>
 
@@ -1095,11 +1162,13 @@
                     <div class="content-grid">
                         <!-- Columna 1 -->
                         <div class="column">
-                            <div class="menu-item"><a href="documentos.html?tema=71" class="main-button">Ingreso al sistema</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=71" class="main-button">Ingreso al
+                                    sistema</a></div>
                             <div class="menu-item has-dropdown">
                                 <div class="main-button">Registro de sesiones y resoluciones del comité</div>
                                 <div class="dropdown-content">
-                                    <a href="documentos.html?tema=72">Responder solicitudes que requieren pronunciamiento del Comité de
+                                    <a href="documentos.html?tema=72">Responder solicitudes que requieren
+                                        pronunciamiento del Comité de
                                         Transparencia</a>
                                     <a href="documentos.html?tema=73">Responder solicitud de ampliación de plazo </a>
                                     <a href="documentos.html?tema=74">Respuestas </a>
@@ -1155,12 +1224,14 @@
                                     <a href="documentos.html?tema=95">Buscador de Solicitudes ARCOP</a>
                                 </div>
                             </div>
-                            <div class="menu-item"><a href="documentos.html?tema=96" class="main-button">Estatus de solicitudes </a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=96" class="main-button">Estatus de
+                                    solicitudes </a></div>
                         </div>
 
                         <!-- Columna 3 -->
                         <div class="column">
-                            <div class="menu-item"><a href="documentos.html?tema=97" class="main-button">Dar de baja una solicitud </a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=97" class="main-button">Dar de baja una
+                                    solicitud </a></div>
                             <div class="menu-item has-dropdown">
                                 <div class="main-button">Solicitar Requerimiento/Prevención</div>
                                 <div class="dropdown-content">
@@ -1172,8 +1243,10 @@
                                 </div>
                             </div>
 
-                            <div class="menu-item"><a href="documentos.html?tema=103" class="main-button">Centro de Ayuda</a></div>
-                            <div class="menu-item"><a href="documentos.html?tema=104" class="main-button">Notificaciones que recibe el usuario
+                            <div class="menu-item"><a href="documentos.html?tema=103" class="main-button">Centro de
+                                    Ayuda</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=104" class="main-button">Notificaciones
+                                    que recibe el usuario
                                     de parte
                                     del sistema</a></div>
                         </div>
@@ -1194,8 +1267,10 @@
                     <div class="content-grid">
                         <!-- Columna 1 -->
                         <div class="column">
-                            <div class="menu-item"><a href="documentos.html?tema=105" class="main-button">Ingreso al sistema</a></div>
-                            <div class="menu-item"><a href="documentos.html?tema=106" class="main-button">Atender una solicitud</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=105" class="main-button">Ingreso al
+                                    sistema</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=106" class="main-button">Atender una
+                                    solicitud</a></div>
                         </div>
 
                         <!-- Columna 2 -->
@@ -1207,12 +1282,14 @@
                                     <a href="documentos.html?tema=108">Modifica, Revoca y Ordena</a>
                                 </div>
                             </div>
-                            <div class="menu-item"><a href="documentos.html?tema=109" class="main-button">Orden de cumplimiento</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=109" class="main-button">Orden de
+                                    cumplimiento</a></div>
                         </div>
 
                         <!-- Columna 3 -->
                         <div class="column">
-                            <div class="menu-item"><a href="documentos.html?tema=110" class="main-button">Notificar orden de cumplimiento</a>
+                            <div class="menu-item"><a href="documentos.html?tema=110" class="main-button">Notificar
+                                    orden de cumplimiento</a>
                             </div>
                         </div>
                     </div>
@@ -1227,7 +1304,8 @@
                     <div class="content-grid">
                         <!-- Columna 1 -->
                         <div class="column">
-                            <div class="menu-item"><a href="documentos.html?tema=111" class="main-button">Ingreso al sistema</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=111" class="main-button">Ingreso al
+                                    sistema</a></div>
                         </div>
 
                         <!-- Columna 2 -->
@@ -1243,7 +1321,8 @@
 
                         <!-- Columna 3 -->
                         <div class="column">
-                            <div class="menu-item"><a href="documentos.html?tema=114" class="main-button">Solicitudes</a></div>
+                            <div class="menu-item"><a href="documentos.html?tema=114"
+                                    class="main-button">Solicitudes</a></div>
                         </div>
                     </div>
 
@@ -1265,6 +1344,3 @@
 </body>
 
 </html>
-
-
-
