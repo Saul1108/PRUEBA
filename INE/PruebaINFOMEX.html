@@ -286,10 +286,18 @@
             transition: all 0.2s;
         }
 
-        .dropdown-content a:hover {
+        .dropdown-content a:hover,
+        .dropdown-content a:focus-visible {
             font-weight: 700;
             background-color: rgba(255, 255, 255, 0.15);
             padding-left: 25px;
+            outline: none;
+        }
+
+        /* --- FOCO DE TECLADO --- */
+        .has-dropdown .main-button:focus-visible {
+            outline: 3px solid #34a8f3;
+            outline-offset: -3px;
         }
 
         /* --- TEMAS DE COLOR --- */
@@ -606,10 +614,13 @@
                         }
                     }
 
-                    // Dropdowns: solo abrir al hacer clic, comportamiento exclusivo
+                    // Dropdowns: solo abrir al hacer clic o Enter, comportamiento exclusivo
                     document.querySelectorAll('.has-dropdown .main-button').forEach(function (btn) {
                         btn.style.cursor = 'pointer';
-                        btn.addEventListener('click', function (e) {
+                        btn.setAttribute('tabindex', '0');
+                        btn.setAttribute('role', 'button');
+
+                        function toggleDropdown(e) {
                             e.stopPropagation();
                             var parent = btn.closest('.menu-item');
                             var dropdown = parent.querySelector('.dropdown-content');
@@ -628,10 +639,30 @@
                                 dropdown.classList.add('open');
                                 parent.classList.add('is-open');
                             }
+                        }
+
+                        btn.addEventListener('click', toggleDropdown);
+
+                        // Soporte de teclado: Enter abre/cierra igual que clic
+                        btn.addEventListener('keydown', function (e) {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                toggleDropdown(e);
+                            }
+                            // Escape cierra el dropdown actual
+                            if (e.key === 'Escape') {
+                                var parent = btn.closest('.menu-item');
+                                var dropdown = parent.querySelector('.dropdown-content');
+                                if (dropdown.classList.contains('open')) {
+                                    dropdown.classList.remove('open');
+                                    parent.classList.remove('is-open');
+                                    btn.focus();
+                                }
+                            }
                         });
                     });
 
-                    // Cerrar dropdowns al hacer clic fuera
+                    // Cerrar dropdowns al hacer clic fuera o presionar Escape global
                     document.addEventListener('click', function () {
                         document.querySelectorAll('.dropdown-content.open').forEach(function (d) {
                             d.classList.remove('open');
