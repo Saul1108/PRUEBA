@@ -7,6 +7,7 @@
     <title>Visualizador - INFOMEX</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
     <style>
         /* 1. Reset Global */
@@ -333,7 +334,7 @@
                 <a id="link-modulo" class="download-link" download>
                     Descargar guía del módulo <i class="fas fa-file-download"></i>
                 </a>
-                <a href="Infomex_Admin.pdf" class="download-link" download>
+                <a id="link-guia-completa" href="Infomex_Admin.pdf" class="download-link" download>
                     Descargar guía completa <i class="fas fa-book"></i>
                 </a>
             </div>
@@ -655,20 +656,82 @@
                 btnSiguiente.style.visibility = 'hidden';
             }
 
-            // Fetch para descarga (se usa la primera imagen del set)
-            fetch(primeraImagen)
-                .then(response => response.ok ? response.blob() : Promise.reject())
-                .then(blob => {
-                    const urlBlob = window.URL.createObjectURL(blob);
-                    linkModulo.href = urlBlob;
-                    const extension = imagenes[0].split('.').pop();
-                    const nombreLimpio = `Guia_${data.n.replace(/\s+/g, '_')}.${extension}`;
-                    linkModulo.setAttribute('download', nombreLimpio);
-                })
-                .catch(() => {
-                    linkModulo.href = primeraImagen;
-                    linkModulo.setAttribute('download', imagenes[0]);
+            // --- DESCARGA GUÍA COMPLETA (PDF según módulo) ---
+            const mapaPDF = {
+                'admin': 'Infomex_Admin.pdf',
+                'ut': 'Infomex_UTGestion.pdf',
+                'ar': '3-Areas_Responsables.pdf',
+                'ct': 'Infomex_CT.pdf',
+                'rev': 'Infomex_Revisor.pdf',
+                'con': 'INE_Consulta.pdf'
+            };
+            const linkGuiaCompleta = document.getElementById('link-guia-completa');
+            if (data.mod && mapaPDF[data.mod]) {
+                linkGuiaCompleta.href = mapaPDF[data.mod];
+                linkGuiaCompleta.setAttribute('download', mapaPDF[data.mod]);
+            }
+
+            // --- DESCARGA GUÍA DEL MÓDULO (imagen única o ZIP) ---
+            const nombreBase = `Guia_${data.n.replace(/[\s/\\:*?"<>|]/g, '_')}`;
+
+            if (imagenes.length === 1) {
+                // --- Imagen única: descarga directa ---
+                fetch(primeraImagen)
+                    .then(r => r.ok ? r.blob() : Promise.reject())
+                    .then(blob => {
+                        const urlBlob = window.URL.createObjectURL(blob);
+                        linkModulo.href = urlBlob;
+                        const ext = imagenes[0].split('.').pop();
+                        linkModulo.setAttribute('download', `${nombreBase}.${ext}`);
+                    })
+                    .catch(() => {
+                        linkModulo.href = primeraImagen;
+                        linkModulo.setAttribute('download', imagenes[0].split('/').pop());
+                    });
+            } else {
+                // --- Múltiples imágenes: empaquetar como ZIP ---
+                linkModulo.removeAttribute('href');
+                linkModulo.removeAttribute('download');
+                linkModulo.style.cursor = 'pointer';
+
+                linkModulo.addEventListener('click', async function (e) {
+                    e.preventDefault();
+                    // Indicador visual de progreso
+                    const textoOriginal = linkModulo.innerHTML;
+                    linkModulo.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando ZIP...';
+                    linkModulo.style.pointerEvents = 'none';
+
+                    try {
+                        const zip = new JSZip();
+                        const carpeta = zip.folder(nombreBase);
+
+                        await Promise.all(imagenes.filter(Boolean).map(async (nombreImg) => {
+                            try {
+                                const r = await fetch(resolverRuta(nombreImg));
+                                if (r.ok) {
+                                    const blob = await r.blob();
+                                    carpeta.file(nombreImg.split('/').pop(), blob);
+                                }
+                            } catch (_) { /* imagen no disponible, se omite */ }
+                        }));
+
+                        const zipBlob = await zip.generateAsync({ type: 'blob' });
+                        const url = window.URL.createObjectURL(zipBlob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `${nombreBase}.zip`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);
+                    } catch (err) {
+                        alert('Error al generar el ZIP. Verifica tu conexión e inténtalo de nuevo.');
+                    } finally {
+                        linkModulo.innerHTML = textoOriginal;
+                        linkModulo.style.pointerEvents = '';
+                    }
                 });
+            }
 
         } else {
             // Manejo de error si el tema no existe
