@@ -7,6 +7,7 @@
     <title>Documentos de Apoyo</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
     <style>
         /* 1. Reset Global */
@@ -168,17 +169,27 @@
 
         .download-link {
             text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
             color: #321b44;
             font-weight: 700;
             font-size: 0.9em;
+            font-family: 'Roboto', sans-serif;
             display: flex;
             align-items: center;
             gap: 8px;
             transition: 0.3s;
+            padding: 0;
         }
 
         .download-link:hover {
             color: #8e44ad;
+        }
+
+        .download-link:disabled {
+            opacity: 0.5;
+            cursor: wait;
         }
 
 
@@ -317,12 +328,12 @@
             <h2 class="doc-title" id="titulo-doc">Guía visual: Cargando...</h2>
 
             <div class="download-area">
-                <a href="Infomex_Admin.pdf" class="download-link" download>
+                <button class="download-link" id="btn-descargar-archivo" onclick="descargarArchivo()">
                     Descargar archivo <i class="fas fa-file-download"></i>
-                </a>
-                <a href="Infomex_Admin.pdf" class="download-link" download>
+                </button>
+                <button class="download-link" id="btn-descargar-fichas" onclick="descargarFichasTecnicas()">
                     Descargar Fichas Técnicas <i class="fas fa-book"></i>
-                </a>
+                </button>
             </div>
         </div>
 
@@ -354,45 +365,150 @@
         const params = new URLSearchParams(window.location.search);
         const temaId = params.get('tema');
 
+        /* ===================================================
+           DESCARGA 1: Imágenes visibles → ZIP
+        =================================================== */
+        async function descargarArchivo() {
+            const btn = document.getElementById('btn-descargar-archivo');
+            const imgs = document.querySelectorAll('#contenedor-imagenes img');
+            if (!imgs.length) { alert('No hay imágenes cargadas.'); return; }
+
+            btn.disabled = true;
+            btn.innerHTML = 'Generando ZIP... <i class="fas fa-spinner fa-spin"></i>';
+
+            try {
+                const zip = new JSZip();
+                for (const img of imgs) {
+                    const url = img.src;
+                    const resp = await fetch(url);
+                    if (!resp.ok) throw new Error('Error al obtener: ' + url);
+                    const blob = await resp.blob();
+                    const filename = url.split('/').pop();
+                    zip.file(filename, blob);
+                }
+                const content = await zip.generateAsync({ type: 'blob' });
+                const a = document.createElement('a');
+                const nombreTema = (document.getElementById('titulo-doc').innerText || 'archivo').replace(/[^a-z0-9]/gi, '_');
+                a.href = URL.createObjectURL(content);
+                a.download = nombreTema + '.zip';
+                a.click();
+                URL.revokeObjectURL(a.href);
+            } catch (err) {
+                alert('Error al generar el ZIP: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Descargar archivo <i class="fas fa-file-download"></i>';
+            }
+        }
+
+        /* ===================================================
+           DESCARGA 2: Todos los PDFs de documentosApoyo/ → ZIP
+        =================================================== */
+        const todosPDFs = [
+            '1-Ficha_UT-FT-PDP-002-2020-PlazosInternos1.pdf',
+            '1-UT-FT-AI-0001-2020-InformacionPublica1.pdf',
+            '10-UT-FT-AI-0006-2020-AU.pdf',
+            '11-Informacion_Publica.pdf',
+            '12-Incompetencia.pdf',
+            '13-Inexistencia.pdf',
+            '14-Confidencialidad.pdf',
+            '15-Reserva.pdf',
+            '2-Ficha_UT-FT-PDP-001-2020-EsquemaBasicoRespuesta1.pdf',
+            '2-UT-FT-AI-0002-2020-Incompetencia.pdf',
+            '3-UT-FT-AI-0003-2020-ConfidencialidadV2.pdf',
+            '4-UT-FT-AI-0003-2020-A1.pdf',
+            '5-UT-FT-AI-0003-2020-A2.pdf',
+            '6-UT-FT-AI-0004-2020-ReservaV2.pdf',
+            '7-UT-FT-AI-0004-2020-AU.pdf',
+            '8-UT-FT-AI-0005-2020-InexistenciaV2.pdf',
+            '9-UT-FT-AI-0006-2020-SugerenciaTurno.pdf'
+        ];
+
+        async function descargarFichasTecnicas() {
+            const btn = document.getElementById('btn-descargar-fichas');
+            btn.disabled = true;
+            btn.innerHTML = 'Generando ZIP... <i class="fas fa-spinner fa-spin"></i>';
+
+            try {
+                const zip = new JSZip();
+                let errores = [];
+                for (const pdf of todosPDFs) {
+                    const url = 'documentosApoyo/' + pdf;
+                    try {
+                        const resp = await fetch(url);
+                        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                        const blob = await resp.blob();
+                        zip.file(pdf, blob);
+                    } catch (e) {
+                        errores.push(pdf + ' (' + e.message + ')');
+                    }
+                }
+                if (errores.length) {
+                    console.warn('Archivos no descargados:\n' + errores.join('\n'));
+                }
+                const content = await zip.generateAsync({ type: 'blob' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(content);
+                a.download = 'Fichas_Tecnicas.zip';
+                a.click();
+                URL.revokeObjectURL(a.href);
+            } catch (err) {
+                alert('Error al generar el ZIP de fichas: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Descargar Fichas Técnicas <i class="fas fa-book"></i>';
+            }
+        }
+
         const biblioteca = {
             '1': { n: 'Información Pública', img: ['1-UT-FT-AI-0001-2020-InformacionPublica1-01.png', '1-UT-FT-AI-0001-2020-InformacionPublica1-02.png'] },
             '2': { n: 'Incompetencia', img: ['2-UT-FT-AI-0002-2020-Incompetencia.png'] },
 
             '3': { n: 'Confidencialidad', img: ['3-UT-FT-AI-0003-2020-ConfidencialidadV2-01.png', '3-UT-FT-AI-0003-2020-ConfidencialidadV2-02.png', '3-UT-FT-AI-0003-2020-ConfidencialidadV2-03.png'] },
-            '4': { n: 'Confidencialidad - Anexo 1', img: ['4-UT-FT-AI-0003-2020-A1-01.png','4-UT-FT-AI-0003-2020-A1-02.png', '4-UT-FT-AI-0003-2020-A1-03.png', '4-UT-FT-AI-0003-2020-A1-04.png'] },
+            '4': { n: 'Confidencialidad - Anexo 1', img: ['4-UT-FT-AI-0003-2020-A1-01.png', '4-UT-FT-AI-0003-2020-A1-02.png', '4-UT-FT-AI-0003-2020-A1-03.png', '4-UT-FT-AI-0003-2020-A1-04.png'] },
             '5': { n: 'Confidencialidad- Anexo 2', img: ['5-UT-FT-AI-0003-2020-A2-01.png', '5-UT-FT-AI-0003-2020-A2-02.png'] },
-            
+
             '6': { n: 'Reserva', img: ['6-UT-FT-AI-0004-2020-ReservaV2-01.png', '6-UT-FT-AI-0004-2020-ReservaV2-02.png', '6-UT-FT-AI-0004-2020-ReservaV2-03.png'] },
             '7': { n: 'Reserva - Anexo único', img: ['7-UT-FT-AI-0004-2020-AU-01.png', '7-UT-FT-AI-0004-2020-AU-02.png'] },
             '8': { n: 'Declaración de inexistencia', img: ['8-UT-FT-AI-0005-2020-InexistenciaV2-01.png', '8-UT-FT-AI-0005-2020-InexistenciaV2-02.png', '8-UT-FT-AI-0005-2020-InexistenciaV2-03.png'] },
             '9': { n: 'Sugerencia Turno', img: ['9-UT-FT-AI-0006-2020-SugerenciaTurno-01.png', '9-UT-FT-AI-0006-2020-SugerenciaTurno-02.png'] },
             '10': { n: 'Sugerencia Turno - Anexo único', img: ['10-UT-FT-AI-0006-2020-AU.png'] },
 
-            '11': { n: 'Información Pública', img: ['11-Informacion_Publica-01.png', '11-Informacion_Publica-02.png', '11-Informacion_Publica-03.png',
-                                 '11-Informacion_Publica-04.png', '11-Informacion_Publica-05.png', '11-Informacion_Publica-06.png', 
-                                 '11-Informacion_Publica-07.png', '11-Informacion_Publica-08.png', '11-Informacion_Publica-09.png', 
-                                 '11-Informacion_Publica-10.png', '11-Informacion_Publica-11.png', '11-Informacion_Publica-12.png', 
-                                 '11-Informacion_Publica-13.png', '11-Informacion_Publica-14.png'] },
-            '12': { n: 'Incompetencia', img: ['12-Incompetencia-01.png', '12-Incompetencia-02.png', '12-Incompetencia-03.png',
-                                              '12-Incompetencia-04.png', '12-Incompetencia-05.png', '12-Incompetencia-06.png',
-                                              '12-Incompetencia-07.png'] },
-            '13': { n: 'Inexistencia', img: ['13-Inexistencia-01.png', '13-Inexistencia-02.png', '13-Inexistencia-03.png',
-                                             '13-Inexistencia-04.png', '13-Inexistencia-05.png', '13-Inexistencia-06.png',
-                                             '13-Inexistencia-07.png', '13-Inexistencia-08.png', '13-Inexistencia-09.png',
-                                             '13-Inexistencia-10.png'] },
-            '14': { n: 'Confidencialidad', img: ['14-Confidencialidad-01.png', '14-Confidencialidad-02.png', '14-Confidencialidad-03.png',
-                                                '14-Confidencialidad-04.png', '14-Confidencialidad-05.png', '14-Confidencialidad-06.png',
-                                                '14-Confidencialidad-07.png', '14-Confidencialidad-08.png', '14-Confidencialidad-09.png',
-                                                '14-Confidencialidad-10.png', '14-Confidencialidad-11.png', '14-Confidencialidad-12.png',
-                                                '14-Confidencialidad-13.png', '14-Confidencialidad-14.png'] },
-            '15': { n: 'Reserva', img: ['15-Reserva-01.png', '15-Reserva-02.png', '15-Reserva-03.png',
-                                        '15-Reserva-04.png', '15-Reserva-05.png', '15-Reserva-06.png',
-                                        '15-Reserva-07.png', '15-Reserva-08.png', '15-Reserva-09.png',
-                                        '15-Reserva-10.png', '15-Reserva-11.png'] },
+            '11': {
+                n: 'Información Pública', img: ['11-Informacion_Publica-01.png', '11-Informacion_Publica-02.png', '11-Informacion_Publica-03.png',
+                    '11-Informacion_Publica-04.png', '11-Informacion_Publica-05.png', '11-Informacion_Publica-06.png',
+                    '11-Informacion_Publica-07.png', '11-Informacion_Publica-08.png', '11-Informacion_Publica-09.png',
+                    '11-Informacion_Publica-10.png', '11-Informacion_Publica-11.png', '11-Informacion_Publica-12.png',
+                    '11-Informacion_Publica-13.png', '11-Informacion_Publica-14.png']
+            },
+            '12': {
+                n: 'Incompetencia', img: ['12-Incompetencia-01.png', '12-Incompetencia-02.png', '12-Incompetencia-03.png',
+                    '12-Incompetencia-04.png', '12-Incompetencia-05.png', '12-Incompetencia-06.png',
+                    '12-Incompetencia-07.png']
+            },
+            '13': {
+                n: 'Inexistencia', img: ['13-Inexistencia-01.png', '13-Inexistencia-02.png', '13-Inexistencia-03.png',
+                    '13-Inexistencia-04.png', '13-Inexistencia-05.png', '13-Inexistencia-06.png',
+                    '13-Inexistencia-07.png', '13-Inexistencia-08.png', '13-Inexistencia-09.png',
+                    '13-Inexistencia-10.png']
+            },
+            '14': {
+                n: 'Confidencialidad', img: ['14-Confidencialidad-01.png', '14-Confidencialidad-02.png', '14-Confidencialidad-03.png',
+                    '14-Confidencialidad-04.png', '14-Confidencialidad-05.png', '14-Confidencialidad-06.png',
+                    '14-Confidencialidad-07.png', '14-Confidencialidad-08.png', '14-Confidencialidad-09.png',
+                    '14-Confidencialidad-10.png', '14-Confidencialidad-11.png', '14-Confidencialidad-12.png',
+                    '14-Confidencialidad-13.png', '14-Confidencialidad-14.png']
+            },
+            '15': {
+                n: 'Reserva', img: ['15-Reserva-01.png', '15-Reserva-02.png', '15-Reserva-03.png',
+                    '15-Reserva-04.png', '15-Reserva-05.png', '15-Reserva-06.png',
+                    '15-Reserva-07.png', '15-Reserva-08.png', '15-Reserva-09.png',
+                    '15-Reserva-10.png', '15-Reserva-11.png']
+            },
 
             '16': { n: 'Plazos internos', img: ['1-Ficha_UT-FT-PDP-002-2020-PlazosInternos1.png'] },
             '17': { n: 'Esquema básico de respuestas', img: ['2-Ficha_UT-FT-PDP-001-2020-EsquemaBasicoRespuesta1-01.png', '2-Ficha_UT-FT-PDP-001-2020-EsquemaBasicoRespuesta1-02.png'] },
- 
+
 
         };
 
